@@ -1,0 +1,33 @@
+DrugRisk.Info Project Team
+--------------------------
+The DrugRisk.Info project provides a simple user interface to obtain Adverse Event, Label, and Enforcement Report information given a drug name from the OpenFDA open-source API for FDA drug, device, and food data. Our project team, organized as an aggressive Scrum team with daily releases starting Sunday, includes:
+
+PROJECT LEADER, Wyatt Webb, 304-616-3175, wwebb@sevatec.com
+Wyatt will serve as the sole authority for the DrugRisk.info prototype. He retains final authority and responsibility for all design, technical, architectural, and development decisions. The final quality of the delivered DrugRisk.info prototype is his responsibility.
+
+PROJECT MANAGER, Wyatt Webb, 304-616-3175, wwebb@sevatec.com
+As the Project Manager, Wyatt leads the multi-disciplinary team to deliver the planned iterations (Sun/Mon/Tue) for the DrugRisk.info prototype. He works with our users ("People") to elicit requirements and seeks to define and obtain stakeholder buy-in for the DrugRisk.info definition and delivery approach. He plans product delivery, interprets feedback from our People, reviews usage patterns, and communicates with our technical team to ensure successful delivery.
+
+TECHNICAL ARCHITECT, Mike McKinney, 757-416-8118, mmckinney@sevatec.com
+Mike ensures that DrugRisk.info maintains its simplicity-first design approach and architects a modern, responsive design. He develops the operating infrastructure and systems to facilitate rapid, documented development of DrugRisk.info to achieve its operational objectives.
+
+VISUAL DESIGNER, Erin Stenzel, 540-429-9515, estenzel@sevatec.com
+As the Visual Designer, Erin will oversee the visual design of DrugRisk.info to ensure it follows the simplicity-first approach. She will coordinate the activities of the design and development team related to visual requirements as elicited from the users and to ensure DrugRisk.info complies with release management and change control processes and standards, including compliance with style guides.
+
+FRONTEND WEB DEVELOPER, Doug Crane, 202-320-6437, dcrane@sevatec.com
+Doug provides the user experience for DrugRisk.info with modern, front-end development tools and responsive design. He leverages open source solutions and full-stake frameworks to deliver interactive capabilities consistent with the simplicity-first expectations for the DrugRisk.info web application.
+
+BACKEND WEB DEVELOPER, Gax Ayalew, 301-646-8884, gayalew@sevatec.com
+Serving as the Backend Web Developer, Gax will support all server-side processing, data storage, and integration necessary to fulfill the requirements of the frontend user interface for the DrugRisk.info application. He delivers user friendly documentation for deployment and usage, following test-driven development techniques to ensure quality for the DrugRisk.info application server.
+
+DEVOPS ENGINEER, Connor McCarthy, 267-994-9931, cmccarthy@sevatec.com
+Connor establishes and configures the services supporting the development of DrugRisk.info, including AWS, Linux, Docker, Tomcat, Jenkins, MongoDB, etc. as needed for the automated deployment, testing, and inspection of new builds resulting from developer changes to web application artifacts. He ensures that DrugRisk.info remains always-deployable and always-deployed, rejecting developer changes that compromise the operational integrity of the application.
+
+USERS ("PEOPLE")
+For the purposes of the prototype, we have seven users of differing background and skill level providing feedback for design, usage, and testing of the DrugRisk.info web application.  These People include:
+
+   Alexadra Baird, 703-501-9300, abaird@sevatec.com
+   Stephanie Callaghan, 703-346-3031, scallaghan@sevatec.com
+   Burke Cox, 703-615-3282, bcox@sevatec.com
+   Casey Garvey, 315-323-5719, cgarvey@sevatec.com
+   Josh Rubin, 202-492-3902, jrubin@sevatec.com
