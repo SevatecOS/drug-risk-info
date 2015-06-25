@@ -5,7 +5,7 @@ Thursday, June 25, 2015 - 12:00 noon
 Participants: Wyatt, Mike, Erin, Doug, Connor, Burke
 
 Synopsis:
-The team met in the War Room to compare notes after senior leadership decided to respond to the GSA Agile Delivery Services solicitation this morning. Reviewing the OpenFDA.gov website and the various web resources associated with its data, we determined that a user-friendly, very simple query UI for this data could provide interesting and meaningful results regarding drug labeling, adverse events, and enforcement reports.
+The team met in the War Room to compare notes after senior leadership decided to respond to the GSA Agile Delivery Services solicitation this morning. Reviewing the OpenFDA.gov website and the various web resources associated with its data, we determined that a user-friendly, very simple query UI for this data could provide interesting and meaningful results regarding the data contained therein.
 
 First Step Design Framing
 -------------------------
@@ -16,7 +16,7 @@ What would the users want to see?
 Why would they use this application?
 Where could we introduce interesting and distinguishing characterists?
 
-"We will build a Google like interface to search the drug information provided on OpenFDA.gov and return relevant results."
+"We will build a Google like interface to search the drug, device, and food information provided on OpenFDA.gov and return relevant results."
 
 Second Step Design Framing
 --------------------------
@@ -24,6 +24,9 @@ Second Step Design Framing
 
 Third Step Design Framing
 -------------------------
+* Narrowed scope to only drug data
+* Removed reference to data source
+
 "Our simplicity-first DrugRisk information search enables non-technical users to retrieve relevant information about the use, risks, and enforcement actions regarding specific drugs."
 
 Fourth Step Design Framing - Possible Solutions
@@ -38,6 +41,3 @@ Conclusion:
 After secondary review of our design framing, we remain confident that our solution achieves the scoping goals for our design challenge:
 
 "Our simplicity-first DrugRisk information search enables non-technical users to retrieve relevant information about the use, risks, and enforcement actions regarding specific drugs."
-
-
-
