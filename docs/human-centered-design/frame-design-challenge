@@ -1,0 +1,43 @@
+DrugRisk.Info Frame Design Challenge
+------------------------------------
+Thursday, June 25, 2015 - 12:00 noon
+
+Participants: Wyatt, Mike, Erin, Doug, Connor, Burke
+
+Synopsis:
+The team met in the War Room to compare notes after senior leadership decided to respond to the GSA Agile Delivery Services solicitation this morning. Reviewing the OpenFDA.gov website and the various web resources associated with its data, we determined that a user-friendly, very simple query UI for this data could provide interesting and meaningful results regarding drug labeling, adverse events, and enforcement reports.
+
+First Step Design Framing
+-------------------------
+What could we do that would actually be useful?
+What is important about this data?
+Who would be a likely user?
+What would the users want to see?
+Why would they use this application?
+Where could we introduce interesting and distinguishing characterists?
+
+"We will build a Google like interface to search the drug information provided on OpenFDA.gov and return relevant results."
+
+Second Step Design Framing
+--------------------------
+"Our simplicity-first DrugRisk information search enables non-technical users to retrieve relevant information from the OpenFDA.gov website."
+
+Third Step Design Framing
+-------------------------
+"Our simplicity-first DrugRisk information search enables non-technical users to retrieve relevant information about the use, risks, and enforcement actions regarding specific drugs."
+
+Fourth Step Design Framing - Possible Solutions
+-----------------------------------------------
+- Google-like simple search, maybe auto complete?
+- Limited responses; easily displayed on mobile?
+- Nationwide heat maps for adverse events?
+- Drug interaction trees?
+- Post-search filtering of results?
+
+Conclusion:
+After secondary review of our design framing, we remain confident that our solution achieves the scoping goals for our design challenge:
+
+"Our simplicity-first DrugRisk information search enables non-technical users to retrieve relevant information about the use, risks, and enforcement actions regarding specific drugs."
+
+
+
