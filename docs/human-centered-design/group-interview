@@ -1,0 +1,22 @@
+DrugRisk.Info Group Interview
+---------------------------------
+Thursday, June 25, 2015 - 4:00 pm
+
+Participants: Wyatt, Mike, Alex, Erin, Steph, Casey, Burke, Josh
+
+Synopsis:
+After framing our design challenge, we collected several of our potential system "users" to understand what they think would be useful.  A few of our team members needed to proxy as users given our limited number of people we are able to dedicate to this prototype effort.
+
+Group Constituency:
+We selected group members with an emphasis on non-technical resources. Given that our problem set was drug information, we prioritized parents as it seemed likely that this information would be useful for researching medicines one's child might be taking. To keep it diverse, we purposfully selected individuals without children for a differing perspective.
+
+Meeting Area:
+Rather than a conference room, we met in our casual "lounge", an open area with soft seating and no whiteboards or conference table to encourage honest interaction and discussion.
+
+Strategy:
+We posed our problem statement and shared some of the ideas that we had regarding potential solutions. 
+
+The overall consensus supported our intial thesis: simple is better. Casey brought out a mobile app she used for ordering drugs for her pets and highlighted some of the strengths. Alex felt it was important to use words that were clear to the users, rather than FDA lexicon (e.g. "Critical reports" rather than "Class III reports"). Josh suggested having the label appear on a standard prescription medicine container to maintain a connection with interfaces already understood outside of the Internet/technology domain.
+
+Results:
+We narrowed the initial plan into an inital use case that returns the label information and adverse events for an entered drug, with a clear plan to add enforcement reports assuming time permits. A "tag-cloud" like interface for trending searches also rated as a higher-priority feature.
