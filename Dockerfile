@@ -5,7 +5,7 @@ ENV PATH $CATALINA_HOME/bin:$PATH
 WORKDIR $CATALINA_HOME
 
 RUN set -x \
-	&& curl -fSL "https://s3-us-west-2.amazonaws.com/drugriskinfo/source/target/DrugRiskInfo.war" -o ROOT.war \
+	&& curl -fSL "https://s3-us-west-2.amazonaws.com/drugriskinfo/DrugRiskInfo.war" -o ROOT.war \
 	&& mv $CATALINA_HOME/webapps/ROOT /tmp/. \
 	&& mv ROOT.war $CATALINA_HOME/webapps/. 
 
