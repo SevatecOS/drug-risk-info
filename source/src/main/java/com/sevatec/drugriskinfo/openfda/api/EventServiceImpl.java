@@ -1,5 +1,6 @@
 package com.sevatec.drugriskinfo.openfda.api;
 
+/*
 import com.opencsv.CSVReader;
 import com.opencsv.bean.ColumnPositionMappingStrategy;
 import com.opencsv.bean.CsvToBean;
@@ -19,7 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  *
  * @author gax
- */
+ * /
 public class EventServiceImpl implements EventService {
     
     public EventServiceImpl() {
@@ -66,3 +67,4 @@ public class EventServiceImpl implements EventService {
         return result;
     }
 }
+*/
