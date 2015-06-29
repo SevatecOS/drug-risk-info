@@ -1,6 +1,6 @@
 #/bin/bash
 
-mv source/target/DrugRiskInfo.war ROOT.war
+mv source/target/DrugRiskInfo.war .
 
 docker build -t mmckinneyatsevatec/drugriskinfo:latest .
 
