@@ -1,13 +1,11 @@
-FROM mmckinneyatsevatec/tomcat:v1
+FROM tomcat:8.0
+MAINTAINER sevatec.com
 
-ENV CATALINA_HOME /usr/local/tomcat
-ENV PATH $CATALINA_HOME/bin:$PATH
 WORKDIR $CATALINA_HOME
 
-RUN set -x \
-	&& curl -fSL "https://s3-us-west-2.amazonaws.com/drugriskinfo/DrugRiskInfo.war" -o ROOT.war \
-	&& mv $CATALINA_HOME/webapps/ROOT /tmp/. \
-	&& mv ROOT.war $CATALINA_HOME/webapps/. 
+RUN rm -rf $CATALINA_HOME/webapps/*
+
+ADD DrugRiskInfo.war $CATALINA_HOME/webapps/ROOT.war
 
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
