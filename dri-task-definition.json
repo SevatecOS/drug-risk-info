@@ -2,7 +2,7 @@
   "family": "dri-task",
   "containerDefinitions": [
     {
-      "image": "mmckinneyatsevatec/drugriskinfo:v%BUILD_NUMBER%",
+      "image": "mmckinneyatsevatec/drugriskinfo:%BUILD_NUMBER%",
       "name": "dri-container",
       "portMappings": [
         {
