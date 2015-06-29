@@ -1,0 +1,33 @@
+{
+  "family": "dri-task",
+  "containerDefinitions": [
+    {
+      "image": "mmckinneyatsevatec/drugriskinfo:%BUILD_NUMBER%",
+      "name": "dri-container",
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 8080,
+          "protocol": "tcp"
+        }
+      ],
+      "command": [
+        "/usr/local/tomcat/bin/catalina.sh",
+        "run"
+      ],
+      "environment": [
+        {
+          "name": "PATH",
+          "value": "$CATALINA_HOME/bin:$PATH"
+        },
+        {
+          "name": "CATALINA_HOME",
+          "value": "/usr/local/tomcat"
+        }
+      ],
+      "essential": true,
+      "memory": 500,
+      "cpu": 500
+    }
+  ]
+}
