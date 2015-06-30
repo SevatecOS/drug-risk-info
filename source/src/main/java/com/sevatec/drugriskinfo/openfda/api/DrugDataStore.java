@@ -17,9 +17,18 @@ import java.util.Map;
  * @author gax
  */
 public class DrugDataStore {
+    
+    private static DrugDataStore INSTANCE;
     private static HashMap<String, Drug> cache;
     private File csvPath;
 
+    public static synchronized DrugDataStore getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new DrugDataStore();
+        }
+        return INSTANCE;
+    }
+    
     public File getCsvPath() {
         return csvPath;
     }

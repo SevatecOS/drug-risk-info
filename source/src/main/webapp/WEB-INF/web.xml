@@ -6,6 +6,12 @@
   <display-name>Archetype Created Web Application</display-name>
   <context-param>
       <param-name>drug-data-file</param-name>
-      <param-value></param-value>
+      <!-- This path should be a maven profile.xml property, or something that can be customised for individuals-->
+      <!-- for CI : ??? /home/gax/Downloads/faers_data/ascii/DRUG14Q4.txt -->
+      <!-- for gax : /home/gax/Downloads/faers_data/ascii/DRUG14Q4.txt -->
+      <!-- for burke : C:/???? -->
+      <!-- for wyatt : C:/???? -->
+      <!-- for mike : C:/???? -->
+      <param-value>/home/gax/Downloads/faers_data/ascii/DRUG14Q4.txt</param-value>
   </context-param>
 </web-app>
