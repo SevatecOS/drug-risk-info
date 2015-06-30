@@ -3,7 +3,7 @@ package com.sevatec.drugriskinfo.openfda.api;
 import java.io.Serializable;
 
 /**
- *
+ * DTO for drug information
  * @author gax
  */
 public class Drug implements Serializable {
