@@ -1,12 +1,6 @@
 package com.sevatec.drugriskinfo.openfda.api;
 
-/*
-import com.opencsv.CSVReader;
-import com.opencsv.bean.ColumnPositionMappingStrategy;
-import com.opencsv.bean.CsvToBean;
 import edu.emory.mathcs.backport.java.util.Collections;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  *
  * @author gax
- * /
+ */
 public class EventServiceImpl implements EventService {
     
     private DrugDataStore cache;
@@ -66,4 +60,3 @@ public class EventServiceImpl implements EventService {
         return result;
     }
 }
-*/
