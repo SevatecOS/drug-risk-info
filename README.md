@@ -1,4 +1,4 @@
 # DrugRisk.info web application
-[http://drugrisk.info/](http://drugrisk.info/ "DrugRisk.info Prototype")
+[http://www.drugrisk.info/](http://www.drugrisk.info/ "DrugRisk.info Prototype")
 
 Placeholder Text
