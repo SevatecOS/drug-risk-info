@@ -5,14 +5,13 @@ import com.opencsv.bean.ColumnPositionMappingStrategy;
 import com.opencsv.bean.CsvToBean;
 import edu.emory.mathcs.backport.java.util.Collections;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Invocation;
-import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 import org.apache.commons.lang3.StringUtils;
 
@@ -22,8 +21,18 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class EventServiceImpl implements EventService {
     
+    private DrugDataStore cache;
+    
     public EventServiceImpl() {
         // noop
+    }
+
+    public DrugDataStore getCache() {
+        return cache;
+    }
+
+    public void setCache(DrugDataStore cache) {
+        this.cache = cache;
     }
     
     @Override
@@ -47,20 +56,10 @@ public class EventServiceImpl implements EventService {
         if (StringUtils.isEmpty(prefix)) {
             return Collections.emptyList();
         }
-        File data = new File("~/Downloads/faers_data/ascii/DRUG14Q4.txt");
-        CSVReader reader = new CSVReader(new FileReader(data), '$');
-        String [] line = reader.readNext();
         ArrayList<Drug> result = new ArrayList<Drug>();
-        
-        ColumnPositionMappingStrategy<Drug> strat = new ColumnPositionMappingStrategy<Drug>();
-        String[] columns = line;
-        strat.setColumnMapping(columns);
-
-        CsvToBean csv = new CsvToBean();
-        List<Drug> list = csv.parse(strat, reader);
-        for (Drug drug : list){
-            if (StringUtils.containsIgnoreCase(drug.getDrugname(), prefix)) {
-                result.add(drug);
+        for (Map.Entry<String, Drug> entry : getCache().getCache().entrySet()) {
+            if (StringUtils.containsIgnoreCase(entry.getKey(), prefix)) {
+                result.add(entry.getValue());
             }
         }
         return result;

@@ -1,10 +1,13 @@
 package com.sevatec.drugriskinfo.openfda.api;
 
+import java.io.Serializable;
+
 /**
  *
  * @author gax
  */
-public class Drug {
+public class Drug implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String primaryid;
 
     
