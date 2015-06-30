@@ -16,7 +16,7 @@ echo "register new task definition with aws"
 aws ecs register-task-definition --family dri-task --cli-input-json file://dri-task-definition-v_${BUILD_NUMBER}.json
 
 echo "getting current task def version number"
-REV=`aws ecs describe-task-definition --task-definition dri-task | egrep "revision" | tr "/" " " | awk '{print $2}' | sed 's/"$//'`
+REV=`aws ecs describe-task-definition --task-definition dri-task | egrep "revision" | tr "/" " " | tr "," " " | awk '{print $2}' | sed 's/"$//'`
 
 echo "... ${REV} ..."
 

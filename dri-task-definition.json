@@ -26,8 +26,8 @@
         }
       ],
       "essential": true,
-      "memory": 500,
-      "cpu": 500
+      "memory": 300,
+      "cpu": 300
     }
   ]
 }
