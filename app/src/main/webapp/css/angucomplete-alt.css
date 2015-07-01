@@ -1,3 +1,9 @@
+.img-contain {
+  width: 50%;
+  height: 15em;
+  margin: 0 auto;
+  overflow: hidden;
+}
 .angucomplete-holder {
     position: relative;
 }
