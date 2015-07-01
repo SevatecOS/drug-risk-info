@@ -53,6 +53,7 @@ public class DynamoSetup {
             while ((line = br.readLine()) != null) {
                 Drug drug = new Drug();
                 drug.setName(line);
+                drug.setSearchName(line.toLowerCase());
                 drug.setViews(0);
                 drug.save();
             }
