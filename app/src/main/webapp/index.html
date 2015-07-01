@@ -4,8 +4,6 @@
 	
 	<HEAD>
  
- 
- 
 	-->
 	<head>
 		<!-- This meta tag ensures proper rendering and touch zooming on mobile devices -->
@@ -28,7 +26,7 @@
 		<!-- Script for the angucomplete-alt autocomplete control -->
 		<script src="js/angucomplete-alt.min.js"></script>
 
-		<!-- Script for establishing  -->
+		<!-- Script for application  -->
 		<script src="js/dri-app.js"></script>
 	</head>
 
@@ -37,40 +35,58 @@
 	<BODY>
 	
 	-->
-	<body ng-controller="driAppCtrl" style="padding-top: 50px; padding-bottom: 50px;">
+	<body ng-controller="dri-app-ctrl" style="padding-top: 50px; padding-bottom: 50px;">
 		<!-- Enables a scaling, full-width viewport -->
-		<div class="container-fluid">
-
-			<!-- Header -->
-			<div class="navbar navbar-fixed-top" style="height: 50px; background: #333333;">
-				<img src="images/HHS-Logo.png" style="vertical-align: middle; padding: 10px; padding-left: 20px;"><span style="vertical-align: middle; color: white;">&nbsp;U.S. Department of Health and Human Services</span>
-			</div>
-
+                        
+                        <!-- 
+                        
+                        SEARCH PANEL
+                        
+                        -->
+                        <div ng-hide="result" class="container-fluid">
+			<!-- Header without Search Again image -->
+			<div class="navbar navbar-fixed-top" style="height: 50px; background: #0A3152;">
+                            <img src="images/HHS-Logo.png" style="vertical-align: middle; padding: 10px;"><span style="vertical-align: middle; color: white;">&nbsp;U.S. Department of Health and Human Services</span>
+                        </div>
+                        
 			<!-- Logo -->
 			<img class="img-responsive" src="images/DrugRisk-Logo.jpg" style="display: block; margin-left: auto; margin-right: auto; padding: 100px 20px 20px 20px;">
-
 			<div angucomplete-alt 
 			     id="drugsID" 
-			     placeholder="Search drugs"
+			     placeholder="Search at open.FDA.gov"
 			     maxlength="50"
 			     pause="400" 
-			     selected-object="selectedDrug"
-			     remote-url="rest/services/getDrugNames/" 
-			     remote-url-data-field="names"
+			     selected-object="doGetFromServer"
+			     remote-url="https://api.github.com/search/repositories?q=" 
+			     remote-url-data-field="items"
 			     search-fields="name"
 			     title-field="name"
 			     minlength="2"
 			     input-class="form-control form-control-small"
-			     match-class="highlight" style="width: 50%; display: block; margin-left: auto; margin-right: auto;">
+                             match-class="highlight" 
+                             style="width: 50%; display: block; margin-left: auto; margin-right: auto;"
+                             clear-selected="true"
+                            ></div>
 			</div>
-
-			<div class="result">
-				<div ng-show="selectedDrug" style="width: 50%; display: block; margin-left: auto; padding-left: 20px; margin-right: auto;">
-					You selected <span class="bold-span">{{selectedDrug.originalObject.name}}</span> which is manufactured by <span class="bold-span">{{selectedDrug.originalObject.full_name}}</span>
-				</div>
+                        
+                        <!--
+                        
+                        RESULTS PANEL
+                        
+                        -->
+			<!-- Header with Search Again image -->
+ 			<div ng-show="result" class="navbar navbar-fixed-top" style="height: 50px; background: #0A3152;">
+                            <img src="images/HHS-Logo.png" style="vertical-align: middle; padding: 10px;"><span style="vertical-align: middle; color: white;">&nbsp;U.S. Department of Health and Human Services</span>
+                            <a href="./index.html"><img alt="Search Again" src="images/Search-Button.jpg" style="border: 0; vertical-align: middle; padding: 7px; float: right;"></a>
 			</div>
+                        <div ng-show="result" class="container-fluid">
+                            <div style="width: 50%; display: block; margin-left: auto; margin-right: auto; margin-top: 1em; margin-bottom: 1em; word-wrap: break-word;">
+                                {{result}}
+                            </div>
+                        </div>
+                        
 
-			<div class="navbar navbar-fixed-bottom" style="height: 50px; background: #333333;">
+			<div class="navbar navbar-fixed-bottom" style="height: 50px; background: #0A3152;">
 				<img src="images/FDA-Logo.png" style="vertical-align: middle; padding: 10px 10px 10px 20px;"><span style="vertical-align: middle; color: white;"/>
 			</div>
 		</div>
