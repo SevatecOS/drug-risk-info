@@ -1,4 +1,4 @@
-package com.sevatec.drugriskinfo.openfda.api;
+package com.sevatec.drugriskinfo.openfda.api.dto;
 
 import java.io.Serializable;
 
