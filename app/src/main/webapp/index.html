@@ -1,10 +1,77 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" class="js">
-<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head>
+<html class="no-js" id="ng-app" ng-app="dri-app">
+<!--
 
-<body>
+<HEAD>
 
-this is a placeholder for DrugRisk.Info
+-->
+<head>
+	<!-- This meta tag ensures proper rendering and touch zooming on mobile devices -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
+	<!-- Stylesheet for the angucomplete-alt autocomplete control -->
+	<link rel="stylesheet" href="css/angucomplete-alt.css"/> 
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+	<!-- Angular JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular-touch.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular-route.min.js"></script>
+
+	<!-- Script for the angucomplete-alt autocomplete control -->
+	<script src="js/angucomplete-alt.min.js"></script>
+
+	<!-- Script for establishing  -->
+	<script src="js/dri-app.js"></script>
+</head>
+
+<!--
+
+<BODY>
+
+-->
+<body ng-controller="driAppCtrl" style="padding-top: 50px; padding-bottom: 50px;">
+	<!-- Enables a scaling, full-width viewport -->
+	<div class="container-fluid">
+	
+		<!-- Header -->
+		<div class="navbar navbar-fixed-top" style="height: 50px; background: #333333;">
+			<img src="images/HHS-Logo.png" style="vertical-align: middle; padding: 10px; padding-left: 20px;"><span style="vertical-align: middle; color: white;">&nbsp;U.S. Department of Health and Human Services</span>
+		</div>
+
+		<!-- Logo -->
+		<img src="images/DrugRisk-logo.jpg" style="display: block; margin-left: auto; margin-right: auto; padding: 100px 20px 20px 20px;">
+
+      
+	<div angucomplete-alt 
+		id="drugsID" 
+		placeholder="Search drugs"
+		maxlength="50"
+		pause="400" 
+		selected-object="selectedDrug"
+		remote-url="https://api.github.com/search/repositories?q=" 
+		remote-url-data-field="items"
+		search-fields="name"
+		title-field="name"
+		minlength="2"
+		input-class="form-control form-control-small"
+		match-class="highlight" style="width: 50%; display: block; margin-left: auto; margin-right: auto;">
+	</div>
+		
+	<div class="result">
+		<div ng-show="selectedDrug" style="width: 50%; display: block; margin-left: auto; padding-left: 20px; margin-right: auto;">
+			You selected <span class="bold-span">{{selectedDrug.originalObject.name}}</span> which is manufactured by <span class="bold-span">{{selectedDrug.originalObject.full_name}}</span>
+		</div>
+	</div>
+
+	<div class="navbar navbar-fixed-bottom" style="height: 50px; background: #333333;">
+		<img src="images/FDA-logo.png" style="vertical-align: middle; padding: 10px 10px 10px 20px;"><span style="vertical-align: middle; color: white;"/>
+	</div>
+	</div>
 </body>
 </html>
