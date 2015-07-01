@@ -5,7 +5,7 @@ WORKDIR $CATALINA_HOME
 
 RUN rm -rf $CATALINA_HOME/webapps/*
 
-ADD DrugRiskInfo.war $CATALINA_HOME/webapps/ROOT.war
+ADD drugriskinfo.war $CATALINA_HOME/webapps/ROOT.war
 
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
