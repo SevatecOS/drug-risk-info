@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html class="no-js" id="ng-app" ng-app="dri-app">
-	<!--
-	
-	<HEAD>
- 
-	-->
 	<head>
 		<!-- This meta tag ensures proper rendering and touch zooming on mobile devices -->
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<!-- Stylesheet for the angucomplete-alt autocomplete control -->
 		<link rel="stylesheet" href="css/angucomplete-alt.css"/> 
+
+        <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -57,8 +54,8 @@
 			     maxlength="50"
 			     pause="400" 
 			     selected-object="doGetFromServer"
-			     remote-url="https://api.github.com/search/repositories?q=" 
-			     remote-url-data-field="items"
+			     remote-url="rest/services/getDrugNames/"
+			     remote-url-data-field="names"
 			     search-fields="name"
 			     title-field="name"
 			     minlength="2"
@@ -89,6 +86,5 @@
 			<div class="navbar navbar-fixed-bottom" style="height: 50px; background: #0A3152;">
 				<img src="images/FDA-Logo.png" style="vertical-align: middle; padding: 10px 10px 10px 20px;"><span style="vertical-align: middle; color: white;"/>
 			</div>
-		</div>
 	</body>
 </html>
