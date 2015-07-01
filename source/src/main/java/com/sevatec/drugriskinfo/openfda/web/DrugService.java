@@ -8,11 +8,13 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
 import com.google.gson.Gson;
-import com.sevatec.drugriskinfo.openfda.api.Drug;
+import com.sevatec.drugriskinfo.openfda.api.dto.Drug;
 import com.sevatec.drugriskinfo.openfda.api.DrugDataStore;
 import com.sevatec.drugriskinfo.openfda.api.EventServiceImpl;
+import com.sevatec.drugriskinfo.openfda.api.dto.DrugLabelList;
 import java.io.IOException;
 import java.util.List;
+import javax.ws.rs.core.MediaType;
 
 /**
  *
@@ -20,7 +22,6 @@ import java.util.List;
  */
 
 @Path("/DrugService")
-@WebService(serviceName = "DrugService")
 public class DrugService {
 
     private EventServiceImpl eventService;
@@ -41,22 +42,16 @@ public class DrugService {
     
     /**
      * 
+     * @param name drug name
      */
     
     @GET
-    @Path("/name")
-    @Produces("application/json")
-    public String drugName(@WebParam(name = "prefix") String prefix) throws IOException {
-     
-        List<Drug> drugNames = eventService.findDrugByName(prefix);
-        Gson gson = new Gson();
-        return gson.toJson(drugNames);
-
-    }
-    
-    @WebMethod(operationName = "hello")
-    public String hello(@WebParam(name = "name") String txt) {
-        return "Hello " + txt + " !";
+    @Path("/label/{name}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @WebMethod(operationName = "label")
+    public DrugLabelList getlabel(@WebParam(name = "name") String name) {
+        return eventService.getLabels(name);
+        
     }
 }
 

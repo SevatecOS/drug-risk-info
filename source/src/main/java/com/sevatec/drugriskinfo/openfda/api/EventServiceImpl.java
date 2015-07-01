@@ -1,5 +1,8 @@
 package com.sevatec.drugriskinfo.openfda.api;
 
+import com.sevatec.drugriskinfo.openfda.api.dto.Drug;
+import com.google.gson.Gson;
+import com.sevatec.drugriskinfo.openfda.api.dto.DrugLabelList;
 import edu.emory.mathcs.backport.java.util.Collections;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,11 +42,35 @@ public class EventServiceImpl implements EventService {
                 .path(Config.EndPoint.END_POINT_DRUG_EVENT)
                 .queryParam("search", searchString).request();
         Response response = request.get();
-        Response.StatusType statusInfo = response.getStatusInfo();
-        if (statusInfo.getStatusCode() != 200) {
-            throw new RuntimeException("openfda respons " + statusInfo.getStatusCode() +" : "+ response.getStatusInfo().getReasonPhrase());
-        }
+//        Response.StatusType statusInfo = response.getStatusInfo();
+//        if (statusInfo.getStatusCode() != 200) {
+//            throw new RuntimeException("openfda response " + statusInfo.getStatusCode() +" : "+ response.getStatusInfo().getReasonPhrase());
+//        }
+        
+//        Gson gson = new Gson();
+//        List<Drug> listlist = response.readEntity(List<Drug>.class);
+//        return list;
         return null;
+    }
+    
+    /**
+     *
+     * @param drugId
+     * @return
+     */
+    public DrugLabelList getLabels(String drugId) {
+        // TODO check if cached.
+        String searchString =   "patient.drug.openfda.generic_name.exact:" + drugId;// TODO bulid serch string
+        Invocation.Builder request = ClientBuilder.newClient()
+                .target(Config.TARGET_URL)
+                .path(Config.EndPoint.END_POINT_DRUG_EVENT)
+                .queryParam("search", searchString)
+                .queryParam("limit", 100)
+                .request();
+        DrugLabelList list = request.get(DrugLabelList.class);
+        
+        // TOD added to cache
+        return list;
     }
     
     @Override

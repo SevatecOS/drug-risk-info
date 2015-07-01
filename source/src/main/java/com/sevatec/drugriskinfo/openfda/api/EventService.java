@@ -1,6 +1,7 @@
 
 package com.sevatec.drugriskinfo.openfda.api;
 
+import com.sevatec.drugriskinfo.openfda.api.dto.Drug;
 import java.io.IOException;
 import java.util.List;
 

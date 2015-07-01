@@ -1,5 +1,6 @@
 package com.sevatec.drugriskinfo.openfda.api;
 
+import com.sevatec.drugriskinfo.openfda.api.dto.Drug;
 import com.opencsv.CSVReader;
 import com.opencsv.bean.ColumnPositionMappingStrategy;
 import com.opencsv.bean.CsvToBean;
