@@ -36,7 +36,7 @@ public class Service {
 	public Response getDrugNames(@PathParam("drug") String drug) {
 
 		Result result = new Result();
-        for (Drug d : new Drug().searchByAttribute("name", drug)) {
+        for (Drug d : new Drug().searchByAttribute("searchName", drug.toLowerCase())) {
             result.addName(d.getName());
         }
 		return Response.ok().entity(result).build();
