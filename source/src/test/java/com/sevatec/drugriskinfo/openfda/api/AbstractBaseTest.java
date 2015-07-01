@@ -1,6 +1,5 @@
 package com.sevatec.drugriskinfo.openfda.api;
 
-import junit.framework.TestCase;
 import org.junit.*;
 import org.mockito.MockitoAnnotations;
 
