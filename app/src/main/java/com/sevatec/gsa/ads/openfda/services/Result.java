@@ -13,6 +13,10 @@ public class Result {
     public void setNames(List<Name> names) {
         this.names = names;
     }
+
+    public void addName(String name) {
+        getNames().add(new Name(name));
+    }
 	
 }
 
