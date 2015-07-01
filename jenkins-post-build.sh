@@ -1,7 +1,7 @@
 #/bin/bash
 
 echo "move the war file into working directory"
-mv source/target/DrugRiskInfo.war .
+mv app/target/drugriskinfo.war .
 
 echo "build the new docker file version"
 docker build -t mmckinneyatsevatec/drugriskinfo:${BUILD_NUMBER} .
