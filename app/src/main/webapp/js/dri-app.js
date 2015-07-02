@@ -6,8 +6,9 @@ app.controller("dri-app-ctrl", function ($scope, $http) {
     $scope.debugtext = "";
 
     $scope.doGetFromServer = function (selected) {
+        var drugName = selected.originalObject.name;
+        
         if (selected) {
-            var drugName = selected.originalObject.name;
             $http.get('rest/services/getDrugDetail/' + drugName).
                     success(function (data, status, headers, config) {
                         $scope.result = data;
@@ -18,10 +19,26 @@ app.controller("dri-app-ctrl", function ($scope, $http) {
         } else {
             $scope.result = null;
         }
+        $scope.searchingStatus = "";
     };
 
     $scope.inputChanged = function (str) {
         $scope.debugtext = "hope";
     };
+    
+    $('#label a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('label');
+    });
+    
+    $('#enforcements a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('enforcements');
+    });   
+    
+    $('#events a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('events');
+    });
 
 });

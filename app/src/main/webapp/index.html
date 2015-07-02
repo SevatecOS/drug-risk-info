@@ -2,15 +2,16 @@
 <html class="no-js" id="ng-app" ng-app="dri-app">
 	<head>
 		<!-- This meta tag ensures proper rendering and touch zooming on mobile devices -->
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1;">
 
 		<!-- Stylesheet for the angucomplete-alt autocomplete control -->
 		<link rel="stylesheet" href="css/angucomplete-alt.css"/> 
 
-        <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+                <!-- JQuery -->
+                <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -25,6 +26,7 @@
 
 		<!-- Script for application  -->
 		<script src="js/dri-app.js"></script>
+		<script src="js/tab.js"></script>
 	</head>
 
 	<!--
@@ -34,20 +36,22 @@
 	-->
 	<body ng-controller="dri-app-ctrl" style="padding-top: 50px; padding-bottom: 50px;">
 		<!-- Enables a scaling, full-width viewport -->
-                        
+                <div class="container-fluid">
                         <!-- 
                         
                         SEARCH PANEL
                         
                         -->
-                        <div ng-hide="result" class="container-fluid">
 			<!-- Header without Search Again image -->
-			<div class="navbar navbar-fixed-top" style="height: 50px; background: #0A3152;">
+			<div ng-hide="result" class="navbar navbar-fixed-top" style="height: 50px; background: #0A3152;">
                             <img src="images/HHS-Logo.png" style="vertical-align: middle; padding: 10px;"><span style="vertical-align: middle; color: white;">&nbsp;U.S. Department of Health and Human Services</span>
                         </div>
                         
+                        <!-- Row -->
+                        <div ng-hide="result" class="row"><div class="col-xs-12">
 			<!-- Logo -->
 			<img class="img-responsive" src="images/DrugRisk-Logo.jpg" style="display: block; margin-left: auto; margin-right: auto; padding: 100px 20px 20px 20px;">
+                        <!-- Search Bar -->
 			<div angucomplete-alt 
 			     id="drugsID" 
 			     placeholder="Search at open.FDA.gov"
@@ -63,8 +67,8 @@
                              match-class="highlight" 
                              style="width: 50%; display: block; margin-left: auto; margin-right: auto;"
                              clear-selected="true"
-                            ></div>
-			</div>
+                            ></div> <!-- autocomplet-alt -->
+                        </div></div> <!-- col, row -->
                         
                         <!--
                         
@@ -76,15 +80,55 @@
                             <img src="images/HHS-Logo.png" style="vertical-align: middle; padding: 10px;"><span style="vertical-align: middle; color: white;">&nbsp;U.S. Department of Health and Human Services</span>
                             <a href="./index.html"><img alt="Search Again" src="images/Search-Button.jpg" style="border: 0; vertical-align: middle; padding: 7px; float: right;"></a>
 			</div>
-                        <div ng-show="result" class="container-fluid">
-                            <div style="width: 50%; display: block; margin-left: auto; margin-right: auto; margin-top: 1em; margin-bottom: 1em; word-wrap: break-word;">
-                                {{result}}
-                            </div>
-                        </div>
-                        
 
+                        <!-- Row (which is basically the panel)-->
+                        <div ng-show="result" class="row"><div class="col-xs-12">
+                            <div style="width: 50%; display: block; margin-left: auto; margin-right: auto; margin-top: 1em; margin-bottom: 1em; word-wrap: break-word;">
+                                
+<div>
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#label" aria-controls="label" role="tab" data-toggle="tab">Label</a></li>
+    <li role="presentation"><a href="#events" aria-controls="events" role="tab" data-toggle="tab">Adverse Events</a></li>
+    <li role="presentation"><a href="#enforcements" aria-controls="enforcements" role="tab" data-toggle="tab">Enforcements</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="label">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                {{result.label.results[0]}}
+            </div>
+        </div>  
+    </div>
+    <div role="tabpanel" class="tab-pane" id="events">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                {{result.events}}
+            </div>
+        </div>  
+    </div>
+    <div role="tabpanel" class="tab-pane" id="enforcements">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                {{result.enforcements}}
+            </div>
+        </div>  
+    </div>
+  </div>
+</div>                   
+                            </div>
+                        </div></div> <!-- col, row -->
+                        
+                        <!--
+                        
+                        FOOTER (SAME FOR ALL PANELS)
+                        
+                        -->
 			<div class="navbar navbar-fixed-bottom" style="height: 50px; background: #0A3152;">
 				<img src="images/FDA-Logo.png" style="vertical-align: middle; padding: 10px 10px 10px 20px;"><span style="vertical-align: middle; color: white;"/>
 			</div>
+                </div> <!-- container-fluid -->
 	</body>
 </html>
