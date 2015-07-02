@@ -19,16 +19,15 @@ public abstract class OpenFdaClientService {
     private final static String PATH_EVENTS = "/drug/event.json";
     private final static String PATH_ENFORCEMENT = "/drug/enforcement.json";
 
-    public static Map<String, Object> getDrugDetail(String drugName) {
+    public static Map<String, Object> getDrugDetail(Drug drug) {
         Map<String, Object> result = new HashMap<String, Object>();
 
-        Drug drug = new Drug().findByAttribute("name", drugName);
         if (drug != null) {
             String productNdc = drug.getProductNdc();
 
-            result.put("label", getDrugLabel(drugName, productNdc));
-            result.put("events", getDrugEvents(drugName, productNdc));
-            result.put("enforcements", getDrugEnforcements(drugName, productNdc));
+            result.put("label", getDrugLabel(drug.getName(), productNdc));
+            result.put("events", getDrugEvents(drug.getName(), productNdc));
+            result.put("enforcements", getDrugEnforcements(drug.getName(), productNdc));
         }
 
         return result;
@@ -43,13 +42,22 @@ public abstract class OpenFdaClientService {
         return getResults(target, drugName, productNdc);
     }
 
-
     private static Map<String, Object> getDrugEvents(String drugName, String productNdc) {
-        return new HashMap<String, Object>();
+        WebTarget target = ClientBuilder.newClient().target(BASE_URL)
+                .path(PATH_EVENTS)
+                .queryParam("search", "patient.drug.openfda.product_ndc:\"" + productNdc + "\"")
+                .queryParam("limit", "10");
+
+        return getResults(target, drugName, productNdc);
     }
 
     private static Map<String, Object> getDrugEnforcements(String drugName, String productNdc) {
-        return new HashMap<String, Object>();
+        WebTarget target = ClientBuilder.newClient().target(BASE_URL)
+                .path(PATH_ENFORCEMENT)
+                .queryParam("search", "openfda.product_ndc:\"" + productNdc + "\"")
+                .queryParam("limit", "1");
+
+        return getResults(target, drugName, productNdc);
     }
 
     private static Map<String, Object> getResults(WebTarget target, String drugName, String productNdc) {
@@ -59,7 +67,6 @@ public abstract class OpenFdaClientService {
         } catch (NotFoundException nfe) {
             result = new HashMap<String, Object>();
             result.put("error", "Nothing found for " + drugName + ":" + productNdc);
-            nfe.printStackTrace();
         }
         return result;
     }

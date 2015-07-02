@@ -101,8 +101,7 @@ public class DynamoSetup {
         request.setTableName(clazz.getAnnotation(DynamoDBTable.class).tableName());
         request.setAttributeDefinitions(atts);
         request.setKeySchema(keys);
-        // using the min here...
-        request.setProvisionedThroughput(new ProvisionedThroughput(3L, 100L));
+        request.setProvisionedThroughput(new ProvisionedThroughput(100L, 200L));
 
         return request;
     }

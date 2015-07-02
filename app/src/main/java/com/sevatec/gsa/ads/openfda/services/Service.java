@@ -6,6 +6,9 @@ package com.sevatec.gsa.ads.openfda.services;
 import com.sevatec.gsa.ads.openfda.data.model.NameSearchResult;
 import com.sevatec.gsa.ads.openfda.data.model.Drug;
 import com.sevatec.gsa.ads.openfda.data.setup.DynamoSetup;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -33,7 +36,14 @@ public class Service {
 	@Path("/getRecentSearches")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getRecentSearches() {
-		return Response.ok().entity("here ya go: ").build();
+        List<Drug> drugs = new Drug().findByAttributeGreaterThan("views", 1);
+        Collections.sort(drugs, new Comparator<Drug>() {
+            @Override
+            public int compare(Drug one, Drug two) {
+                return one.getViews() - two.getViews();
+            }
+        });
+		return Response.ok().entity(drugs).build();
 	}
 
 	@GET
@@ -52,8 +62,25 @@ public class Service {
     @Path("/getDrugDetail/{drugName}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getDrugDetail(@PathParam("drugName") String drugName) {
-        Map<String, Object> result = OpenFdaClientService.getDrugDetail(drugName);
+        Drug drug = new Drug().findByAttribute("searchName", drugName.toLowerCase());
+        Map<String, Object> result = OpenFdaClientService.getDrugDetail(drug);
+        // TODO: we should do this outside the connection - don't block
+        if (hasResults(result)) {
+            drug.setViews(drug.getViews() + 1);
+            drug.save();
+        }
         return Response.ok().entity(result).build();
+    }
+
+    private boolean hasResults(Map<String, Object> result) {
+        if (result != null) {
+            return (
+                    ((Map<String, Object>)result.get("label")).get("error") == null ||
+                    ((Map<String, Object>)result.get("events")).get("error") == null ||
+                    ((Map<String, Object>)result.get("enforcements")).get("error") == null
+                    );
+        }
+        return false;
     }
 
 }
