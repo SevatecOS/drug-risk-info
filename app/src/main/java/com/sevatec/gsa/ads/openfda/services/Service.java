@@ -6,6 +6,7 @@ package com.sevatec.gsa.ads.openfda.services;
 import com.sevatec.gsa.ads.openfda.data.model.NameSearchResult;
 import com.sevatec.gsa.ads.openfda.data.model.Drug;
 import com.sevatec.gsa.ads.openfda.data.setup.DynamoSetup;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -37,13 +38,16 @@ public class Service {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getRecentSearches() {
         List<Drug> drugs = new Drug().findByAttributeGreaterThan("views", 1);
-        Collections.sort(drugs, new Comparator<Drug>() {
+        // have to put drugs in new list due to aws bindings
+        List<Drug> sortDrugs = new ArrayList<Drug>();
+        sortDrugs.addAll(drugs);
+        Collections.sort(sortDrugs, new Comparator<Drug>() {
             @Override
             public int compare(Drug one, Drug two) {
-                return one.getViews() - two.getViews();
+                return two.getViews() - one.getViews();
             }
         });
-		return Response.ok().entity(drugs).build();
+		return Response.ok().entity(sortDrugs).build();
 	}
 
 	@GET
