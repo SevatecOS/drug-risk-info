@@ -5,6 +5,7 @@ package com.sevatec.gsa.ads.openfda.services;
 
 import com.sevatec.gsa.ads.openfda.data.model.NameSearchResult;
 import com.sevatec.gsa.ads.openfda.data.model.Drug;
+import com.sevatec.gsa.ads.openfda.data.model.response.OpenFdaResponse;
 import com.sevatec.gsa.ads.openfda.data.setup.DynamoSetup;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -73,6 +74,15 @@ public class Service {
             drug.setViews(drug.getViews() + 1);
             drug.save();
         }
+        return Response.ok().entity(result).build();
+    }
+
+    @GET
+    @Path("/getNewLabelResponse/{drugName}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getNewLabelResponse(@PathParam("drugName") String drugName) {
+        Drug drug = new Drug().findByAttribute("searchName", drugName.toLowerCase());
+        OpenFdaResponse result = OpenFdaClientService.getNewLabelResponse(drug.getName(), drug.getProductNdc());
         return Response.ok().entity(result).build();
     }
 
