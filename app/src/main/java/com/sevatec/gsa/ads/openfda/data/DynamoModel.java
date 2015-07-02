@@ -65,26 +65,19 @@ public abstract class DynamoModel<T> {
     }
 
     public T findByAttribute(String attributeName, String attributeValue) {
-        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
-        scanExpression.addFilterCondition(attributeName, new Condition()
-                .withComparisonOperator(ComparisonOperator.EQ)
-                .withAttributeValueList(new AttributeValue().withS(attributeValue)));
-        @SuppressWarnings("unchecked")
-        List<T> scanResult = (List<T>) mapper.scan(this.getClass(), scanExpression);
+        List<T> scanResult = listByAttribute(ComparisonOperator.EQ, attributeName, attributeValue);
         if (scanResult.size() >= 1) {
             return scanResult.get(0);
         }
         return null;
     }
 
+    public List<T> findByAttributeGreaterThan(String attributeName, Integer attributeValue) {
+        return listByAttribute(ComparisonOperator.GE, attributeName, attributeValue);
+    }
+
     public List<T> searchByAttribute(String attributeName, String attributeValue) {
-        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
-        scanExpression.addFilterCondition(attributeName, new Condition()
-                .withComparisonOperator(ComparisonOperator.CONTAINS)
-                .withAttributeValueList(new AttributeValue().withS(attributeValue)));
-        @SuppressWarnings("unchecked")
-        List<T> scanResult = (List<T>) mapper.scan(this.getClass(), scanExpression);
-        return scanResult;
+        return listByAttribute(ComparisonOperator.CONTAINS, attributeName, attributeValue);
     }
 
     @SuppressWarnings("unchecked")
@@ -121,5 +114,21 @@ public abstract class DynamoModel<T> {
     }
 
     public abstract boolean exists();
+
+    private List<T> listByAttribute(ComparisonOperator op, String attributeName, Object attributeValue) {
+        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
+        AttributeValue value = null;
+        if (attributeValue instanceof Integer) {
+            value = new AttributeValue().withN(attributeValue.toString());
+        } else {
+            value = new AttributeValue().withS(attributeValue.toString());
+        }
+        scanExpression.addFilterCondition(attributeName, new Condition()
+                .withComparisonOperator(op)
+                .withAttributeValueList(value));
+        @SuppressWarnings("unchecked")
+        List<T> scanResult = (List<T>) mapper.scan(this.getClass(), scanExpression);
+        return scanResult;
+    }
 
 }
