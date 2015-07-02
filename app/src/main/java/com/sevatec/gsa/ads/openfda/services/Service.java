@@ -23,6 +23,14 @@ public class Service {
         Logger.getLogger(Service.class.getName()).log(Level.INFO, "DONE running Dynamo setup...");
     }
 
+    @GET
+    @Path("/drugCount")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getDrugCount() {
+        Integer i = new Drug().count();
+		return Response.ok().entity(i).build();
+	}
+
 	@GET
 	@Path("/getTags")
 	@Produces(MediaType.APPLICATION_JSON)
