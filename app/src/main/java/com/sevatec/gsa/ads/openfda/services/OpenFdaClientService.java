@@ -1,10 +1,9 @@
 package com.sevatec.gsa.ads.openfda.services;
 
 import com.sevatec.gsa.ads.openfda.data.model.Drug;
+import com.sevatec.gsa.ads.openfda.data.model.response.OpenFdaResponse;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
@@ -33,7 +32,7 @@ public abstract class OpenFdaClientService {
         return result;
     }
 
-    private static Map<String, Object> getDrugLabel(String drugName, String productNdc) {
+    public static Map<String, Object> getDrugLabel(String drugName, String productNdc) {
         WebTarget target = ClientBuilder.newClient().target(BASE_URL)
                 .path(PATH_LABEL)
                 .queryParam("search", "openfda.product_ndc:\"" + productNdc + "\"")
@@ -42,7 +41,7 @@ public abstract class OpenFdaClientService {
         return getResults(target, drugName, productNdc);
     }
 
-    private static Map<String, Object> getDrugEvents(String drugName, String productNdc) {
+    public static Map<String, Object> getDrugEvents(String drugName, String productNdc) {
         WebTarget target = ClientBuilder.newClient().target(BASE_URL)
                 .path(PATH_EVENTS)
                 .queryParam("search", "patient.drug.openfda.product_ndc:\"" + productNdc + "\"")
@@ -51,7 +50,7 @@ public abstract class OpenFdaClientService {
         return getResults(target, drugName, productNdc);
     }
 
-    private static Map<String, Object> getDrugEnforcements(String drugName, String productNdc) {
+    public static Map<String, Object> getDrugEnforcements(String drugName, String productNdc) {
         WebTarget target = ClientBuilder.newClient().target(BASE_URL)
                 .path(PATH_ENFORCEMENT)
                 .queryParam("search", "openfda.product_ndc:\"" + productNdc + "\"")
@@ -69,6 +68,23 @@ public abstract class OpenFdaClientService {
             result.put("error", "Nothing found for " + drugName + ":" + productNdc);
         }
         return result;
+    }
+
+    public static OpenFdaResponse getNewLabelResponse(String drugName, String productNdc) {
+        WebTarget target = ClientBuilder.newClient().target(BASE_URL)
+                .path(PATH_LABEL)
+                .queryParam("search", "openfda.product_ndc:\"" + productNdc + "\"")
+                .queryParam("limit", "1");
+        OpenFdaResponse result = null;
+        try {
+            result = target.request(MediaType.APPLICATION_JSON_TYPE).get(OpenFdaResponse.class);
+        } catch (Exception nfe) {
+            result = new OpenFdaResponse();
+            result.setError("Nothing found for " + drugName + ":" + productNdc);
+            nfe.printStackTrace();
+        }
+        return result;
+
     }
 
 }
