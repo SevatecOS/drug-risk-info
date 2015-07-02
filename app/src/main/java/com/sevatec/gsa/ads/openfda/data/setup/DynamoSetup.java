@@ -9,7 +9,7 @@ import com.amazonaws.services.dynamodbv2.model.KeySchemaElement;
 import com.amazonaws.services.dynamodbv2.model.KeyType;
 import com.amazonaws.services.dynamodbv2.model.ProvisionedThroughput;
 import com.amazonaws.services.dynamodbv2.model.ScalarAttributeType;
-import com.sevatec.gsa.ads.openfda.data.Drug;
+import com.sevatec.gsa.ads.openfda.data.model.Drug;
 import com.sevatec.gsa.ads.openfda.data.DynamoModel;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,12 +22,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class DynamoSetup {
+    private static final String DRUGS_FILE = "https://s3-us-west-2.amazonaws.com/drugriskinfo/drugs.txt";
 
     public static void runSetup() {
         setupDrugTable();
     }
 
     private static void setupDrugTable() {
+        if (new Drug().tableExists()) {
+            return;
+        }
         CreateTableRequest request = createRequest(Drug.class);
         Table table;
         try {
@@ -46,17 +50,24 @@ public class DynamoSetup {
         try {
             Logger.getLogger(DynamoSetup.class.getName()).log(Level.INFO, "Starting to load drug table...");
 
-            URL drugsFile = new URL("https://s3-us-west-2.amazonaws.com/drugriskinfo/drugs.txt");
+            URL drugsFile = new URL(DRUGS_FILE);
             br = new BufferedReader(new InputStreamReader(drugsFile.openStream()));
 
             String line = null;
             while ((line = br.readLine()) != null) {
+                System.out.println(line);
+
+                String[] split = line.split("\\|");
+                String name = split[0];
+                String ndc  = split[1];
                 Drug drug = new Drug();
-                drug.setName(line);
-                drug.setSearchName(line.toLowerCase());
+                drug.setName(name);
+                drug.setSearchName(name.toLowerCase());
+                drug.setProductNdc(ndc);
                 drug.setViews(0);
                 drug.save();
             }
+
 
         } catch (Exception ex) {
             Logger.getLogger(DynamoSetup.class.getName()).log(Level.SEVERE, null, ex);
@@ -69,6 +80,7 @@ public class DynamoSetup {
                 }
             }
         }
+        Logger.getLogger(DynamoSetup.class.getName()).log(Level.INFO, "DONE loading drug table...");
 
     }
 
@@ -90,7 +102,7 @@ public class DynamoSetup {
         request.setAttributeDefinitions(atts);
         request.setKeySchema(keys);
         // using the min here...
-        request.setProvisionedThroughput(new ProvisionedThroughput(3L, 3L));
+        request.setProvisionedThroughput(new ProvisionedThroughput(3L, 100L));
 
         return request;
     }

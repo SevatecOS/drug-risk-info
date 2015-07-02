@@ -7,7 +7,9 @@ app.controller("dri-app-ctrl", ['$scope', function($scope) {
         
         $scope.doGetFromServer = function( selected ) {
             if (selected) {
-              $scope.result = selected.originalObject;
+              var drugName = selected.originalObject.name;
+              // need to send request to rest/services/getDrugDetail/{drugName}
+              $scope.result = drugName;
             } else {
               $scope.result = null;
             }            

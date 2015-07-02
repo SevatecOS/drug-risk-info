@@ -102,6 +102,10 @@ public abstract class DynamoModel<T> {
         return table;
     }
 
+    public boolean tableExists() {
+        return Tables.doesTableExist(client, getTableName());
+    }
+
     public Table createTable(CreateTableRequest request)
             throws InterruptedException {
         Table table = null;

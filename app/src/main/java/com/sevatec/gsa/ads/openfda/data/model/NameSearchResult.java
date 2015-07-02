@@ -1,9 +1,9 @@
-package com.sevatec.gsa.ads.openfda.services;
+package com.sevatec.gsa.ads.openfda.data.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Result {
+public class NameSearchResult {
 
     private List<Name> names = new ArrayList<Name>();
 
