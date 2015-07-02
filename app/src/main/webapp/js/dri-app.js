@@ -1,9 +1,9 @@
 var app = angular.module('dri-app', ["ngTouch", "angucomplete-alt", "ngRoute"]);
 var xmlHttp = null;
 
-app.controller("dri-app-ctrl", function ($scope, $http) {
+app.controller("dri-app-ctrl", function ($scope, $sce, $http) {
     $scope.result = null;
-    $scope.debugtext = "";
+    $scope.test = null;
 
     $scope.doGetFromServer = function (selected) {
         var drugName = selected.originalObject.name;
@@ -12,6 +12,7 @@ app.controller("dri-app-ctrl", function ($scope, $http) {
             $http.get('rest/services/getDrugDetail/' + drugName).
                     success(function (data, status, headers, config) {
                         $scope.result = data;
+                        $scope.test = $sce.trustAsHtml(data.label.results[0].purpose_table[0]);
                     }).
                     error(function (data, status, headers, config) {
                         $scope.result = data;
@@ -19,13 +20,8 @@ app.controller("dri-app-ctrl", function ($scope, $http) {
         } else {
             $scope.result = null;
         }
-        $scope.searchingStatus = "";
     };
 
-    $scope.inputChanged = function (str) {
-        $scope.debugtext = "hope";
-    };
-    
     $('#label a').click(function (e) {
         e.preventDefault();
         $(this).tab('label');
