@@ -1,0 +1,25 @@
+Team Sevatec Sprint1 Retrospective
+What went well:
+•	Daily Scrum meetings were effective for coordination 
+•	Automation through Jenkins AWS and other software gained massive 
+•	Many team member had not worked together before but were able to quickly gel and communicate effectively
+•	Team was able to quickly change tasking to account for sick team member.  
+
+What went poorly or was problematic:
+•	Daily scrum meetings were not efficient due to the high rate of development and short time frame for release one and finalization of project
+•	Estimation for environment set up went much longer than expected, but 
+•	Tasks were underestimated.
+•	A primary team member took ill and was unavailable during all of sprint 1
+•	The lack of a Sponsor hindered the ability to act as a proper Agile team.
+
+Top impediments to watch and items or topics to change in next sprint
+•	Initial environment set up of the hardware and software set up took more time than expected but the automation led to greater efficiency and gains in momentum later in the sprint
+•	Evenly distribute workload patterns should become part of the teams daily scrums
+•	Work in smaller batches will avoid major bottlenecks (example DTO packages that held up the deployment of the Enforcement Feature was taken as a lump task and slowed the deployment of the actual feature)
+•	Make requirements easier to translate into integrated framework tasks
+•	Write more unit tests
+•	Be more accurate when estimating.  This may not be a systemic issue since a  large amount of over/under estimated tasks were for initial environment setup
+•	User testing should occur more frequently
+
+SMART Plan (Specific, Measurable, Achievable, Realistic, and Time Bound):
+Integrate users and testers into the 
