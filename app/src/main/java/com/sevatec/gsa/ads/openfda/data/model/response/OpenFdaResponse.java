@@ -7,7 +7,19 @@ public class OpenFdaResponse {
     private String error;
     private MetaResponseNode meta;
     private List<ResultResponseNode> results;
+    
+    private EventNode events;
+    private EnforcementNode enforcement;
+    private EnforcementNode enforcements;
 
+    public EventNode getEvents() {
+        return events;
+    }
+
+    public void setEvents(EventNode events) {
+        this.events = events;
+    }
+    
     public List<ResultResponseNode> getResults() {
         return results;
     }
@@ -31,4 +43,18 @@ public class OpenFdaResponse {
     public void setMeta(MetaResponseNode meta) {
         this.meta = meta;
     }
+
+    public void setEnforcements(EnforcementNode enforcements) {
+        this.enforcements = enforcements;
+    }
+
+    public EnforcementNode getEnforcement() {
+        return enforcement;
+    }
+
+    public void setEnforcement(EnforcementNode enforcement) {
+        this.enforcement = enforcement;
+    }
+    
+    
 }

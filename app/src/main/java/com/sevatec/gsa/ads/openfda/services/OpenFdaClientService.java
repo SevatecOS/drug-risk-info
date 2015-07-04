@@ -1,7 +1,10 @@
 package com.sevatec.gsa.ads.openfda.services;
 
 import com.sevatec.gsa.ads.openfda.data.model.Drug;
+import com.sevatec.gsa.ads.openfda.data.model.response.EnforcementNode;
+import com.sevatec.gsa.ads.openfda.data.model.response.EventNode;
 import com.sevatec.gsa.ads.openfda.data.model.response.OpenFdaResponse;
+import com.sevatec.gsa.ads.openfda.data.model.response.ResultResponseNode;
 import java.util.HashMap;
 import java.util.Map;
 import javax.ws.rs.NotFoundException;
@@ -16,8 +19,9 @@ public abstract class OpenFdaClientService {
     private final static String BASE_URL = "https://api.fda.gov";
     private final static String PATH_LABEL = "/drug/label.json";
     private final static String PATH_EVENTS = "/drug/event.json";
-    private final static String PATH_ENFORCEMENT = "/drug/enforcement.json";
+    private final static String PATH_ENFORCEMENT = "/drug/enforcement.json"; // TODO : find the real path 
 
+    @Deprecated
     public static Map<String, Object> getDrugDetail(Drug drug) {
         Map<String, Object> result = new HashMap<String, Object>();
 
@@ -32,6 +36,7 @@ public abstract class OpenFdaClientService {
         return result;
     }
 
+    @Deprecated
     public static Map<String, Object> getDrugLabel(String drugName, String productNdc) {
         WebTarget target = ClientBuilder.newClient().target(BASE_URL)
                 .path(PATH_LABEL)
@@ -41,6 +46,7 @@ public abstract class OpenFdaClientService {
         return getResults(target, drugName, productNdc);
     }
 
+    @Deprecated
     public static Map<String, Object> getDrugEvents(String drugName, String productNdc) {
         WebTarget target = ClientBuilder.newClient().target(BASE_URL)
                 .path(PATH_EVENTS)
@@ -50,6 +56,7 @@ public abstract class OpenFdaClientService {
         return getResults(target, drugName, productNdc);
     }
 
+    @Deprecated
     public static Map<String, Object> getDrugEnforcements(String drugName, String productNdc) {
         WebTarget target = ClientBuilder.newClient().target(BASE_URL)
                 .path(PATH_ENFORCEMENT)
@@ -59,6 +66,7 @@ public abstract class OpenFdaClientService {
         return getResults(target, drugName, productNdc);
     }
 
+    @Deprecated
     private static Map<String, Object> getResults(WebTarget target, String drugName, String productNdc) {
         Map<String, Object> result;
         try {
@@ -69,15 +77,37 @@ public abstract class OpenFdaClientService {
         }
         return result;
     }
-
-    public static OpenFdaResponse getNewLabelResponse(String drugName, String productNdc) {
+    
+    
+    private static ResultResponseNode getDrugEnforcements(String productNdc) {
         WebTarget target = ClientBuilder.newClient().target(BASE_URL)
+                .path(PATH_ENFORCEMENT)
+                .queryParam("search", "openfda.product_ndc:\"" + productNdc + "\"")
+                .queryParam("limit", "1");
+
+        return target.request().get(ResultResponseNode.class);
+    }
+    
+    private static OpenFdaResponse getNewLabelResponse(String productNdc) {
+        WebTarget labeltarget = ClientBuilder.newClient().target(BASE_URL)
                 .path(PATH_LABEL)
                 .queryParam("search", "openfda.product_ndc:\"" + productNdc + "\"")
                 .queryParam("limit", "1");
+        OpenFdaResponse result = labeltarget.request(MediaType.APPLICATION_JSON_TYPE).get(OpenFdaResponse.class);
+        
+        WebTarget eventsTarget = ClientBuilder.newClient().target(BASE_URL)
+                .path(PATH_EVENTS)
+                .queryParam("search", "patient.drug.openfda.product_ndc:\"" + productNdc + "\"")
+                .queryParam("limit", "10");
+        result.setEvents(eventsTarget.request(MediaType.APPLICATION_JSON_TYPE).get(EventNode.class));
+//        result.setEnforcements(target.request(MediaType.APPLICATION_JSON_TYPE).get(EnforcementNode.class));
+        return result;
+    }
+    
+    public static OpenFdaResponse getNewLabelResponse(String drugName, String productNdc) {
         OpenFdaResponse result = null;
         try {
-            result = target.request(MediaType.APPLICATION_JSON_TYPE).get(OpenFdaResponse.class);
+            result = getNewLabelResponse(productNdc);
         } catch (Exception nfe) {
             result = new OpenFdaResponse();
             result.setError("Nothing found for " + drugName + ":" + productNdc);

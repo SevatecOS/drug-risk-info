@@ -1,22 +1,24 @@
 package com.sevatec.gsa.ads.openfda.data.model.response;
 
+import java.util.List;
+
 public class ResultResponseNode {
 
     /* label.json */
     private String use_in_specific_populations_table;
     private String information_for_patients;
-    private String indications_and_usage;
+    private List<String> indications_and_usage;
     private String contraindications;
     private String how_supplied;
-    private String dosage_and_administration;
-    private String package_label_principal_display_panel;
+    private List<String> dosage_and_administration;
+    private List<String> package_label_principal_display_panel;
     private String description;
     private String warnings_and_cautions;
     private String pharmacodynamics;
     private String pediatric_use;
     private String mechanism_of_action;
     private String pediatric_use_table;
-    private String spl_product_data_elements;
+    private List<String> spl_product_data_elements;
     private String adverse_reactions_table;
     private String geriatric_use;
     private String adverse_reactions;
@@ -53,7 +55,7 @@ public class ResultResponseNode {
     private String recall_initiation_date;
     private String state;
     private String event_id;
-    private String product_type;
+    private List<String> product_type;
     private String product_description;
     private String country;
     private String city;
@@ -81,11 +83,11 @@ public class ResultResponseNode {
         this.information_for_patients = information_for_patients;
     }
 
-    public String getIndications_and_usage() {
+    public List<String> getIndications_and_usage() {
         return indications_and_usage;
     }
 
-    public void setIndications_and_usage(String indications_and_usage) {
+    public void setIndications_and_usage(List<String> indications_and_usage) {
         this.indications_and_usage = indications_and_usage;
     }
 
@@ -105,19 +107,19 @@ public class ResultResponseNode {
         this.how_supplied = how_supplied;
     }
 
-    public String getDosage_and_administration() {
+    public List<String> getDosage_and_administration() {
         return dosage_and_administration;
     }
 
-    public void setDosage_and_administration(String dosage_and_administration) {
+    public void setDosage_and_administration(List<String> dosage_and_administration) {
         this.dosage_and_administration = dosage_and_administration;
     }
 
-    public String getPackage_label_principal_display_panel() {
+    public List<String> getPackage_label_principal_display_panel() {
         return package_label_principal_display_panel;
     }
 
-    public void setPackage_label_principal_display_panel(String package_label_principal_display_panel) {
+    public void setPackage_label_principal_display_panel(List<String> package_label_principal_display_panel) {
         this.package_label_principal_display_panel = package_label_principal_display_panel;
     }
 
@@ -169,11 +171,11 @@ public class ResultResponseNode {
         this.pediatric_use_table = pediatric_use_table;
     }
 
-    public String getSpl_product_data_elements() {
+    public List<String> getSpl_product_data_elements() {
         return spl_product_data_elements;
     }
 
-    public void setSpl_product_data_elements(String spl_product_data_elements) {
+    public void setSpl_product_data_elements(List<String> spl_product_data_elements) {
         this.spl_product_data_elements = spl_product_data_elements;
     }
 
@@ -409,11 +411,11 @@ public class ResultResponseNode {
         this.event_id = event_id;
     }
 
-    public String getProduct_type() {
+    public List<String> getProduct_type() {
         return product_type;
     }
 
-    public void setProduct_type(String product_type) {
+    public void setProduct_type(List<String> product_type) {
         this.product_type = product_type;
     }
 

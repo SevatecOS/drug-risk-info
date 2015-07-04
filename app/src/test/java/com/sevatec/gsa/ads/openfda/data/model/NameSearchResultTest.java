@@ -17,9 +17,14 @@ public class NameSearchResultTest {
     public void testSomeMethod() {
         NameSearchResult names = new NameSearchResult();
         names.addName("foo");
+        names.addName("bar");
         Genson genson = new Genson();
         String result  = genson.serialize(names);
+        System.out.println("--------------###>"+com.owlike.genson.Genson.class.getProtectionDomain().getCodeSource().getLocation());
+        
         System.out.println(result);
+        names = genson.deserialize(result, NameSearchResult.class);
+        assertEquals(2, names.getNames().size());
     }
     
 }

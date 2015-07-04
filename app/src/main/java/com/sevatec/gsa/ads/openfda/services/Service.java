@@ -76,7 +76,7 @@ public class Service {
         }
         return Response.ok().entity(result).build();
     }
-
+    
     @GET
     @Path("/getNewLabelResponse/{drugName}")
     @Produces(MediaType.APPLICATION_JSON)

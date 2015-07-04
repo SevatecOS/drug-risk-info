@@ -1,78 +1,82 @@
 package com.sevatec.gsa.ads.openfda.data.model.response;
 
+import java.util.List;
+
 public class OpenFdaResponseNode {
 
-    private String substance_name;
-    private String product_type;
-    private String pharm_class_cs;
-    private String manufacturer_name;
-    private String brand_name;
-    private String route;
-    private String pharm_class_epc;
-    private String generic_name;
+    private List<String> substance_name;
+    private List<String> product_type;
+    private List<String> pharm_class_cs;
+    private List<String> manufacturer_name;
+    private List<String> brand_name;
+    private List<String> route;
+    private List<String> pharm_class_epc;
+    private List<String> generic_name;
 
-    public String getSubstance_name() {
+    public List<String> getSubstance_name() {
         return substance_name;
     }
 
-    public void setSubstance_name(String substance_name) {
+    public void setSubstance_name(List<String> substance_name) {
         this.substance_name = substance_name;
     }
 
-    public String getProduct_type() {
+    public List<String> getProduct_type() {
         return product_type;
     }
 
-    public void setProduct_type(String product_type) {
+    public void setProduct_type(List<String> product_type) {
         this.product_type = product_type;
     }
 
-    public String getPharm_class_cs() {
+    public List<String> getPharm_class_cs() {
         return pharm_class_cs;
     }
 
-    public void setPharm_class_cs(String pharm_class_cs) {
+    public void setPharm_class_cs(List<String> pharm_class_cs) {
         this.pharm_class_cs = pharm_class_cs;
     }
 
-    public String getManufacturer_name() {
+    public List<String> getManufacturer_name() {
         return manufacturer_name;
     }
 
-    public void setManufacturer_name(String manufacturer_name) {
+    public void setManufacturer_name(List<String> manufacturer_name) {
         this.manufacturer_name = manufacturer_name;
     }
 
-    public String getBrand_name() {
+    public List<String> getBrand_name() {
         return brand_name;
     }
 
-    public void setBrand_name(String brand_name) {
+    public void setBrand_name(List<String> brand_name) {
         this.brand_name = brand_name;
     }
 
-    public String getRoute() {
+    public List<String> getRoute() {
         return route;
     }
 
-    public void setRoute(String route) {
+    public void setRoute(List<String> route) {
         this.route = route;
     }
 
-    public String getPharm_class_epc() {
+    public List<String> getPharm_class_epc() {
         return pharm_class_epc;
     }
 
-    public void setPharm_class_epc(String pharm_class_epc) {
+    public void setPharm_class_epc(List<String> pharm_class_epc) {
         this.pharm_class_epc = pharm_class_epc;
     }
 
-    public String getGeneric_name() {
+    public List<String> getGeneric_name() {
         return generic_name;
     }
 
-    public void setGeneric_name(String generic_name) {
+    public void setGeneric_name(List<String> generic_name) {
         this.generic_name = generic_name;
     }
+
+
 
 }

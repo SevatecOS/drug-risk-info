@@ -1,9 +1,10 @@
 package com.sevatec.gsa.ads.openfda.data.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NameSearchResult {
+public class NameSearchResult implements Serializable {
 
     private List<Name> names = new ArrayList<Name>();
 
@@ -17,22 +18,31 @@ public class NameSearchResult {
     public void addName(String name) {
         getNames().add(new Name(name));
     }
+    
+    public static class Name implements Serializable {
+
+        private String name;
+
+        public Name() {
+            // noop
+        }
+        
+        public Name(String name) {
+            this.name = name;
+        }
+        
+        
+        
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+    }
 	
 }
 
-class Name {
-    private String name;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Name(String name) {
-        this.name = name;
-    }
-
-}
