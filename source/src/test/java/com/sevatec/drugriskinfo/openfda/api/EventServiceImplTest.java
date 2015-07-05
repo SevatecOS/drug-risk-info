@@ -102,7 +102,8 @@ public class EventServiceImplTest extends AbstractBaseTest {
         fail("The test case is a prototype.");
     }
 
-    @Ignore//Test
+    //@Ignore//
+    @Test
     public void testGetLabelsFromOpenFda() {
         String drugName = "ASPIRIN";
         DrugLabelList result = servive.getLabels(drugName);
