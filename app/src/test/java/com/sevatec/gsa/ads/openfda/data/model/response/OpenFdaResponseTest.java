@@ -17,6 +17,7 @@ public class OpenFdaResponseTest {
     public void testDeserialize() {
         Genson genson = new Genson();
         OpenFdaResponse deserialize = genson.deserialize(OpenFdaResponse.class.getResourceAsStream("/label.json"), OpenFdaResponse.class);
+        assertEquals(1, deserialize.getResults().size());
     }
     
 }
