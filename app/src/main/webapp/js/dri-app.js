@@ -22,19 +22,23 @@ app.controller("dri-app-ctrl", function ($scope, $sce, $http) {
         }
     };
 
+    // Initialation for the Label tab
     $('#label a').click(function (e) {
         e.preventDefault();
         $(this).tab('label');
     });
     
+    // Initialization for the Events tab
+    $('#events a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('events');
+    });
+
+    // Initialization for the Enforcements tab
     $('#enforcements a').click(function (e) {
         e.preventDefault();
         $(this).tab('enforcements');
     });   
     
-    $('#events a').click(function (e) {
-        e.preventDefault();
-        $(this).tab('events');
-    });
 
 });

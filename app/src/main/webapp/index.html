@@ -1,192 +1,186 @@
 <!DOCTYPE html>
 <html class="no-js" id="ng-app" ng-app="dri-app">
-	<head>
-		<!-- This meta tag ensures proper rendering and touch zooming on mobile devices -->
-		<meta name="viewport" content="width=device-width, initial-scale=1;">
+    <head>
+        <!-- This meta tag ensures proper rendering and touch zooming on mobile devices -->
+        <meta name="viewport" content="width=device-width, initial-scale=1;">
 
-		<!-- Stylesheet for the angucomplete-alt autocomplete control -->
-		<link rel="stylesheet" href="css/angucomplete-alt.css"/> 
+        <!-- Stylesheet for the angucomplete-alt autocomplete control -->
+        <link rel="stylesheet" href="css/angucomplete-alt.css"/> 
 
-		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
-                <!-- JQuery -->
-                <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <!-- JQuery -->
+        <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 
-		<!-- Latest compiled and minified JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-		<!-- Angular JS -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular-touch.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular-route.min.js"></script>
+        <!-- Angular JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular-touch.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular-route.min.js"></script>
 
-		<!-- Script for the angucomplete-alt autocomplete control -->
-		<script src="js/angucomplete-alt.min.js"></script>
+        <!-- Script for the angucomplete-alt autocomplete control -->
+        <script src="js/angucomplete-alt.min.js"></script>
 
-		<!-- Script for application  -->
-		<script src="js/dri-app.js"></script>
-		<script src="js/tab.js"></script>
-	</head>
+        <!-- Script for application  -->
+        <script src="js/dri-app.js"></script>
+        <script src="js/tab.js"></script>
+    </head>
 
-	<!--
-	
-	<BODY>
-	
-	-->
-	<body ng-controller="dri-app-ctrl" style="padding-top: 50px; padding-bottom: 50px;">
-		<!-- Enables a scaling, full-width viewport -->
-                <div class="container-fluid">
-                        <!-- 
-                        
-                        SEARCH PANEL
-                        
-                        -->
-			<!-- Header without Search Again image -->
-			<div ng-hide="result" class="navbar navbar-fixed-top" style="height: 50px; background: #0A3152;">
-                            <img src="images/HHS-Logo.png" style="vertical-align: middle; padding: 10px;"><span style="vertical-align: middle; color: white;">&nbsp;U.S. Department of Health and Human Services</span>
-                        </div>
-                        
-                        <!-- Row -->
-                        <div ng-hide="result" class="row"><div class="col-xs-12">
-			<!-- Logo -->
-			<img class="img-responsive" src="images/DrugRisk-Logo.jpg" style="display: block; margin-left: auto; margin-right: auto; padding: 100px 20px 20px 20px;">
-                        <!-- Search Bar -->
-			<div angucomplete-alt 
-			     id="drugsID" 
-			     placeholder="Search at open.FDA.gov"
-			     maxlength="50"
-			     pause="400" 
-			     selected-object="doGetFromServer"
-			     remote-url="rest/services/getDrugNames/"
-			     remote-url-data-field="names"
-			     search-fields="name"
-			     title-field="name"
-			     minlength="2"
-			     input-class="form-control form-control-small"
-                             match-class="highlight" 
-                             style="width: 50%; display: block; margin-left: auto; margin-right: auto;"
-                             clear-selected="true"
-                            ></div> <!-- autocomplet-alt -->
-                        </div></div> <!-- col, row -->
-                        
-                        <!--
-                        
-                        RESULTS PANEL
-                        
-                        -->
-			<!-- Header with Search Again image -->
- 			<div ng-show="result" class="navbar navbar-fixed-top" style="height: 50px; background: #0A3152;">
-                            <img src="images/HHS-Logo.png" style="vertical-align: middle; padding: 10px;"><span style="vertical-align: middle; color: white;">&nbsp;U.S. Department of Health and Human Services</span>
-                            <a href="./index.html"><img alt="Search Again" src="images/Search-Button.jpg" style="border: 0; vertical-align: middle; padding: 7px; float: right;"></a>
-			</div>
+    <!--
 
-                        <!-- Row (which is basically the panel)-->
-                        <div ng-show="result" class="row"><div class="col-xs-12">
-                            <div style="width: 50%; display: block; margin-left: auto; margin-right: auto; margin-top: 1em; margin-bottom: 1em; word-wrap: break-word;">
-                                
-<div>
-  <!-- Nav tabs -->
-  <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#label" aria-controls="label" role="tab" data-toggle="tab">Label</a></li>
-    <li role="presentation"><a href="#events" aria-controls="events" role="tab" data-toggle="tab">Adverse Events</a></li>
-    <li role="presentation"><a href="#enforcements" aria-controls="enforcements" role="tab" data-toggle="tab">Enforcements</a></li>
-  </ul>
+    <BODY>
 
-  <!-- Tab panes -->
-  <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="label">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                
-                
-                
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingOne">
-      <h4 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          Indications and Usage
-        </a>
-      </h4>
-    </div>
-    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-      <div class="panel-body">
+    -->
+    <body ng-controller="dri-app-ctrl" style="padding-top: 50px; padding-bottom: 50px;">
+        <!-- Enables a scaling, full-width viewport -->
+        <div class="container-fluid">
+            <!-- 
 
-        {{result.label.results[0].indications_and_usage[0]}} 
-      </div>
-    </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingTwo">
-      <h4 class="panel-title">
-        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          Dosage and Administration
-        </a>
-      </h4>
-    </div>
-    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-      <div class="panel-body">
-        {{result.label.results[0].dosage_and_administration[0]}} 
-      </div>
-    </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingThree">
-      <h4 class="panel-title">
-        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          Purpose Table
-        </a>
-      </h4>
-    </div>
-    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-      <div style="align: center;" class="panel-body">
-        <div ng-bind-html="test"></div>       
-      </div>
-    </div>
-  </div>
-</div>                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
+            SEARCH PANEL
+
+            -->
+            <!-- Header without Search Again image -->
+            <div ng-hide="result" class="navbar navbar-fixed-top" style="height: 50px; background: #0A3152;">
+                <img src="images/HHS-Logo.png" style="vertical-align: middle; padding: 10px;"><span style="vertical-align: middle; color: white;">&nbsp;U.S. Department of Health and Human Services</span>
             </div>
-        </div>  
-    </div>
-    <div role="tabpanel" class="tab-pane" id="events">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                {{result.events}}
+
+            <!-- Row (which is basically the Search panel) -->
+            <div ng-hide="result" class="row"><div class="col-xs-12"> <!-- and a single column the full width of the viewport -->
+                <!-- Logo -->
+                <img class="img-responsive" src="images/DrugRisk-Logo.jpg" style="display: block; margin-left: auto; margin-right: auto; padding: 100px 20px 20px 20px;">
+                <!-- Search Bar -->
+                <div angucomplete-alt 
+                     id="drugsID" 
+                     placeholder="Search at open.FDA.gov"
+                     maxlength="50"
+                     pause="400" 
+                     selected-object="doGetFromServer"
+                     remote-url="rest/services/getDrugNames/"
+                     remote-url-data-field="names"
+                     search-fields="name"
+                     title-field="name"
+                     minlength="2"
+                     input-class="form-control form-control-small"
+                     match-class="highlight" 
+                     style="width: 50%; display: block; margin-left: auto; margin-right: auto;"
+                     clear-selected="true">
+                </div> <!-- autocomplet-alt -->
+            </div></div> <!-- col, row -->
+
+            <!--
+
+            RESULTS PANEL
+
+            -->
+            <!-- Header with Search Again image -->
+            <div ng-show="result" class="navbar navbar-fixed-top" style="height: 50px; background: #0A3152;">
+                <img src="images/HHS-Logo.png" style="vertical-align: middle; padding: 10px;"><span style="vertical-align: middle; color: white;">&nbsp;U.S. Department of Health and Human Services</span>
+                <a href="./index.html"><img alt="Search Again" src="images/Search-Button.jpg" style="border: 0; vertical-align: middle; padding: 7px; float: right;"></a>
             </div>
-        </div>  
-    </div>
-    <div role="tabpanel" class="tab-pane" id="enforcements">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                {{result.enforcements}}
+
+            <!-- Row (which is basically the Results panel)-->
+            <div ng-show="result" class="row"><div class="col-xs-12"> <!-- and a single column the full width of the viewport -->
+                <!-- START: The tabs for Label, Events, and Enforcements -->
+                <div style="width: 50%; display: block; margin-left: auto; margin-right: auto; margin-top: 1em; margin-bottom: 1em; word-wrap: break-word;">
+                    <!-- START: Declare the three tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                      <li role="presentation" class="active"><a href="#label" aria-controls="label" role="tab" data-toggle="tab">Label</a></li>
+                      <li role="presentation"><a href="#events" aria-controls="events" role="tab" data-toggle="tab">Adverse Events</a></li>
+                      <li role="presentation"><a href="#enforcements" aria-controls="enforcements" role="tab" data-toggle="tab">Enforcements</a></li>
+                    </ul> <!-- END: Declare the three tabs -->
+
+                    <!-- START: Tab panes -->
+                    <div class="tab-content">
+                        <!-- START: Label Pane -->
+                        <div role="tabpanel" class="tab-pane active" id="label">
+                            <div class="panel panel-default"> <!-- START: Panel Definition -->
+                                <div class="panel-body"> <!-- START: Panel Body -->
+                                    <!-- START: Panel group for all of the accordions within Label -->
+                                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                        <!-- START: Panel for Indications and Usage -->                
+                                        <div ng-show="result.label.results[0].indications_and_usage[0]" class="panel panel-default">
+                                            <div class="panel-heading" role="tab" id="phIndications">
+                                                <h4 class="panel-title">
+                                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#cIndications" aria-expanded="true" aria-controls="cIndications">
+                                                        Indications and Usage
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="cIndications" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="phIndications">
+                                                <div class="panel-body">
+                                                    {{result.label.results[0].indications_and_usage[0]}} 
+                                                </div>
+                                            </div>
+                                        </div> <!-- END: Panel for Indications and Usage -->  
+
+                                        <!-- START: Panel for Dosage and Administration -->
+                                        <div ng-show="result.label.results[0].dosage_and_administration[0]" class="panel panel-default">
+                                            <div class="panel-heading" role="tab" id="phDosage">
+                                                <h4 class="panel-title">
+                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#cDosage" aria-expanded="false" aria-controls="cDosage">
+                                                        Dosage and Administration
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="cDosage" class="panel-collapse collapse" role="tabpanel" aria-labelledby="phDosage">
+                                                <div class="panel-body">
+                                                    {{result.label.results[0].dosage_and_administration[0]}} 
+                                                </div>
+                                            </div>
+                                        </div> <!-- END: Panel for Dosage and Administration -->
+
+                                        <!-- START: Panel for Purpose Table -->
+                                        <div ng-show="test" class="panel panel-default">
+                                            <div class="panel-heading" role="tab" id="headingThree">
+                                                <h4 class="panel-title">
+                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                        Purpose Table
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                                <div style="align: center;" class="panel-body">
+                                                    <div ng-bind-html="test"></div>       
+                                                </div>
+                                            </div>
+                                        </div> <!-- END: Panel for Purpose Table -->
+                                    </div> <!-- END: Panel group for all of the accordions within Label -->       
+                                </div> <!-- END: Panel Body -->
+                            </div> <!-- END: Panel Definition -->
+                        </div> <!-- END: Label Pane -->
+
+                        <!-- START: Events Pane -->
+                        <div role="tabpanel" class="tab-pane" id="events">
+                            <div class="panel panel-default"> <!-- START: Panel Definition -->
+                                <div class="panel-body"> <!-- START: Panel Body -->
+                                    {{result.events}}
+                                </div> <!-- END: Panel Body -->
+                            </div> <!-- END: Panel Definition -->
+                        </div> <!-- END: Events Pane -->
+
+                        <!-- START: Enforcements Pane -->                            
+                        <div role="tabpanel" class="tab-pane" id="enforcements">
+                            <div class="panel panel-default"> <!-- START: Panel Definition -->
+                                <div class="panel-body"> <!-- START: Panel Body -->
+                                    {{result.enforcements}}
+                                </div> <!-- END: Panel Body -->
+                            </div> <!-- END: Panel Definition -->
+                        </div> <!-- END: Enforcements Pane -->
+                    </div> <!-- END: Tab panes -->    
+                </div> <!-- END: The tabs for Label, Events, and Enforcements -->                  
+            </div></div> <!-- col, row -->
+
+            <!--
+
+            FOOTER (SAME FOR ALL PANELS)
+
+            -->
+            <div class="navbar navbar-fixed-bottom" style="height: 50px; background: #0A3152;">
+                    <img src="images/FDA-Logo.png" style="vertical-align: middle; padding: 10px 10px 10px 20px;"><span style="vertical-align: middle; color: white;"/>
             </div>
-        </div>  
-    </div>
-  </div>
-</div>                   
-                            </div>
-                        </div></div> <!-- col, row -->
-                        
-                        <!--
-                        
-                        FOOTER (SAME FOR ALL PANELS)
-                        
-                        -->
-			<div class="navbar navbar-fixed-bottom" style="height: 50px; background: #0A3152;">
-				<img src="images/FDA-Logo.png" style="vertical-align: middle; padding: 10px 10px 10px 20px;"><span style="vertical-align: middle; color: white;"/>
-			</div>
-                </div> <!-- container-fluid -->
-	</body>
+        </div> <!-- container-fluid -->
+    </body>
 </html>
