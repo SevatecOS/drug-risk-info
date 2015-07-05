@@ -3,7 +3,9 @@ package com.sevatec.gsa.ads.openfda.services;
 import com.sevatec.gsa.ads.openfda.data.model.Drug;
 import com.sevatec.gsa.ads.openfda.data.model.response.DrugDetailNode;
 import com.sevatec.gsa.ads.openfda.data.model.response.EnforcementNode;
+import com.sevatec.gsa.ads.openfda.data.model.response.EnforcementResponse;
 import com.sevatec.gsa.ads.openfda.data.model.response.EventNode;
+import com.sevatec.gsa.ads.openfda.data.model.response.EventResponse;
 import com.sevatec.gsa.ads.openfda.data.model.response.OpenFdaResponse;
 import com.sevatec.gsa.ads.openfda.data.model.response.OpenFdaResponseNode;
 import com.sevatec.gsa.ads.openfda.data.model.response.ResultResponseNode;
@@ -106,9 +108,16 @@ public abstract class OpenFdaClientService {
                 .queryParam("limit", "10");
         
         // something like https://api.fda.gov/drug/event.json?search=patient.drug.openfda.product_ndc:76237-113&limit=10
-        EventNode events = eventsTarget.request(MediaType.APPLICATION_JSON_TYPE).get(EventNode.class);
+        EventResponse events = eventsTarget.request(MediaType.APPLICATION_JSON_TYPE).get(EventResponse.class);
         detail.setEvents(events);
-//        detail.setEnforcements(target.request(MediaType.APPLICATION_JSON_TYPE).get(EnforcementNode.class));
+        
+        WebTarget enforcementTarget = ClientBuilder.newClient().target(BASE_URL)
+                .path(PATH_ENFORCEMENT)
+                .queryParam("search", "product_ndc:" + productNdc + "")
+                .queryParam("limit", "10");
+        // something like https://api.fda.gov/drug/enforcement.json?search=product_ndc:76237-113&limit=10
+        EnforcementResponse enforcement = enforcementTarget.request(MediaType.APPLICATION_JSON_TYPE).get(EnforcementResponse.class);
+        detail.setEnforcements(enforcement);
         return detail;
     }
     

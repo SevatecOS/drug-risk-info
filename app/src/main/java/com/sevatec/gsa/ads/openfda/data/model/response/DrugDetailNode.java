@@ -8,8 +8,8 @@ import java.io.Serializable;
  */
 public class DrugDetailNode implements Serializable {
     private OpenFdaResponse label;
-    private EventNode events;
-    private EnforcementNode enforcements;
+    private EventResponse events;
+    private EnforcementResponse enforcements;
     private String error;
 
     public OpenFdaResponse getLabel() {
@@ -20,19 +20,19 @@ public class DrugDetailNode implements Serializable {
         this.label = label;
     }
 
-    public EventNode getEvents() {
+    public EventResponse getEvents() {
         return events;
     }
 
-    public void setEvents(EventNode events) {
+    public void setEvents(EventResponse events) {
         this.events = events;
     }
 
-    public EnforcementNode getEnforcements() {
+    public EnforcementResponse getEnforcements() {
         return enforcements;
     }
 
-    public void setEnforcements(EnforcementNode enforcements) {
+    public void setEnforcements(EnforcementResponse enforcements) {
         this.enforcements = enforcements;
     }
 
