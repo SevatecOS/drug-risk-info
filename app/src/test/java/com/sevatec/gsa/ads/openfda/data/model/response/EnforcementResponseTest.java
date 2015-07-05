@@ -8,16 +8,16 @@ import static org.junit.Assert.*;
  *
  * @author gax
  */
-public class EventNodeTest {
+public class EnforcementResponseTest {
     
-    public EventNodeTest() {
+    public EnforcementResponseTest() {
     }
 
     @Test
     public void testDeserialize() {
         Genson genson = new Genson();
-        EventNode deserialize = genson.deserialize(EventNode.class.getResourceAsStream("/event.json"), EventNode.class);
-        assertEquals(10, deserialize.getResults().size());
+        EnforcementResponse deserialize = genson.deserialize(EventNode.class.getResourceAsStream("/enforcement.json"), EnforcementResponse.class);
+        assertEquals(1, deserialize.getResults().size());
     }
     
 }

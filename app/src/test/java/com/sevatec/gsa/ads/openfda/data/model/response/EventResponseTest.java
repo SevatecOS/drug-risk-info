@@ -8,16 +8,16 @@ import static org.junit.Assert.*;
  *
  * @author gax
  */
-public class OpenFdaResponseTest {
+public class EventResponseTest {
     
-    public OpenFdaResponseTest() {
+    public EventResponseTest() {
     }
 
     @Test
     public void testDeserialize() {
         Genson genson = new Genson();
-        OpenFdaResponse deserialize = genson.deserialize(OpenFdaResponse.class.getResourceAsStream("/label.json"), OpenFdaResponse.class);
-        assertEquals(1, deserialize.getResults().size());
+        EventResponse deserialize = genson.deserialize(EventNode.class.getResourceAsStream("/event.json"), EventResponse.class);
+        assertEquals(10, deserialize.getResults().size());
     }
     
 }

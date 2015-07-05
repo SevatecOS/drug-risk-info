@@ -1,0 +1,120 @@
+{
+    "meta": {
+        "disclaimer": "openFDA is a beta research project and not for clinical use. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated.",
+        "license": "http://open.fda.gov/license",
+        "last_updated": "2015-05-31",
+        "results": {
+            "skip": 0,
+            "limit": 1,
+            "total": 1
+        }
+    },
+    "results": [
+        {
+            "recall_number": "D-1501-2014",
+            "reason_for_recall": "Temperature Abuse; various products were not stored at Controlled Room Temperature as per USP guidelines during shipping",
+            "status": "Ongoing",
+            "distribution_pattern": "Nationwide",
+            "product_quantity": "5 bottles",
+            "recall_initiation_date": "20140712",
+            "state": "NJ",
+            "event_id": "68793",
+            "product_type": "Drugs",
+            "product_description": "Azor Tablets (amlodipine and olmesartan medoxomil) 10 mg*/40 mg, 30 count bottles, Rx Only, Manufactured for: Daiichi Sankyo, Inc. Parsippany, NJ 07054\nNDC 65597-113-30",
+            "country": "US",
+            "city": "Edison",
+            "recalling_firm": "Daiichi Sankyo Pharma Development",
+            "report_date": "20140806",
+            "@epoch": 1424553174.836488,
+            "voluntary_mandated": "Voluntary: Firm Initiated",
+            "classification": "Class II",
+            "code_info": "Lot #213655B Exp - 12/31/2014",
+            "@id": "e7c42a5c6b101c32eab62ec62734d40acda01a6a62e16e56fd2fa78dceb3e568",
+            "openfda": {
+                "unii": [
+                    "8W1IQP3U10"
+                ],
+                "spl_id": [
+                    "8c973fd2-17a6-11e4-8c21-0800200c9a66"
+                ],
+                "product_ndc": [
+                    "65597-110",
+                    "65597-111",
+                    "65597-112",
+                    "65597-113"
+                ],
+                "substance_name": [
+                    "OLMESARTAN MEDOXOMIL",
+                    "AMLODIPINE BESYLATE"
+                ],
+                "rxcui": [
+                    "730872",
+                    "730866",
+                    "730869",
+                    "744628",
+                    "730861",
+                    "744632",
+                    "744624",
+                    "744636"
+                ],
+                "spl_set_id": [
+                    "f48911e0-705f-11dc-afc9-0002a5d5c51b"
+                ],
+                "product_type": [
+                    "HUMAN PRESCRIPTION DRUG"
+                ],
+                "manufacturer_name": [
+                    "Daiichi Sankyo, Inc."
+                ],
+                "brand_name": [
+                    "AZOR"
+                ],
+                "is_original_packager": [
+                    true
+                ],
+                "route": [
+                    "ORAL"
+                ],
+                "nui": [
+                    "N0000175561",
+                    "N0000000070"
+                ],
+                "pharm_class_moa": [
+                    "Angiotensin 2 Receptor Antagonists [MoA]"
+                ],
+                "package_ndc": [
+                    "65597-110-11",
+                    "65597-110-07",
+                    "65597-113-30",
+                    "65597-113-07",
+                    "65597-112-11",
+                    "65597-113-11",
+                    "65597-110-10",
+                    "65597-113-90",
+                    "65597-111-90",
+                    "65597-110-30",
+                    "65597-113-10",
+                    "65597-111-10",
+                    "65597-111-11",
+                    "65597-111-30",
+                    "65597-112-30",
+                    "65597-110-90",
+                    "65597-112-07",
+                    "65597-111-07",
+                    "65597-112-90",
+                    "65597-112-10"
+                ],
+                "pharm_class_epc": [
+                    "Angiotensin 2 Receptor Blocker [EPC]"
+                ],
+                "generic_name": [
+                    "AMLODIPINE BESYLATE AND OLMESARTAN MEDOXOMIL"
+                ],
+                "application_number": [
+                    "NDA022100"
+                ]
+            },
+            "initial_firm_notification": "Telephone"
+        }
+    ]
+}

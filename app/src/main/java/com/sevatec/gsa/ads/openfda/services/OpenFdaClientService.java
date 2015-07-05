@@ -1,9 +1,13 @@
 package com.sevatec.gsa.ads.openfda.services;
 
 import com.sevatec.gsa.ads.openfda.data.model.Drug;
+import com.sevatec.gsa.ads.openfda.data.model.response.DrugDetailNode;
 import com.sevatec.gsa.ads.openfda.data.model.response.EnforcementNode;
+import com.sevatec.gsa.ads.openfda.data.model.response.EnforcementResponse;
 import com.sevatec.gsa.ads.openfda.data.model.response.EventNode;
+import com.sevatec.gsa.ads.openfda.data.model.response.EventResponse;
 import com.sevatec.gsa.ads.openfda.data.model.response.OpenFdaResponse;
+import com.sevatec.gsa.ads.openfda.data.model.response.OpenFdaResponseNode;
 import com.sevatec.gsa.ads.openfda.data.model.response.ResultResponseNode;
 import java.util.HashMap;
 import java.util.Map;
@@ -50,9 +54,9 @@ public abstract class OpenFdaClientService {
     public static Map<String, Object> getDrugEvents(String drugName, String productNdc) {
         WebTarget target = ClientBuilder.newClient().target(BASE_URL)
                 .path(PATH_EVENTS)
-                .queryParam("search", "patient.drug.openfda.product_ndc:\"" + productNdc + "\"")
+                .queryParam("search", "patient.drug.openfda.product_ndc:" + productNdc + "")
                 .queryParam("limit", "10");
-
+        // fomething like https://api.fda.gov/drug/event.json?search=patient.drug.openfda.product_ndc:%2276237-113%22&limit=10
         return getResults(target, drugName, productNdc);
     }
 
@@ -82,35 +86,48 @@ public abstract class OpenFdaClientService {
     private static ResultResponseNode getDrugEnforcements(String productNdc) {
         WebTarget target = ClientBuilder.newClient().target(BASE_URL)
                 .path(PATH_ENFORCEMENT)
-                .queryParam("search", "openfda.product_ndc:\"" + productNdc + "\"")
+                .queryParam("search", "openfda.product_ndc:" + productNdc + "")
                 .queryParam("limit", "1");
 
         return target.request().get(ResultResponseNode.class);
     }
     
-    private static OpenFdaResponse getNewLabelResponse(String productNdc) {
-        WebTarget labeltarget = ClientBuilder.newClient().target(BASE_URL)
+    private static DrugDetailNode getDrugDetailResponse(String productNdc) {
+        DrugDetailNode detail = new DrugDetailNode();
+        WebTarget labelTarget = ClientBuilder.newClient().target(BASE_URL)
                 .path(PATH_LABEL)
                 .queryParam("search", "openfda.product_ndc:\"" + productNdc + "\"")
                 .queryParam("limit", "1");
-        OpenFdaResponse result = labeltarget.request(MediaType.APPLICATION_JSON_TYPE).get(OpenFdaResponse.class);
+        // something like https://api.fda.gov/drug/label.json?search=openfda.product_ndc:%2276237-113%22&limit=1
+        OpenFdaResponse label = labelTarget.request(MediaType.APPLICATION_JSON_TYPE).get(OpenFdaResponse.class);
+        detail.setLabel(label);
         
         WebTarget eventsTarget = ClientBuilder.newClient().target(BASE_URL)
                 .path(PATH_EVENTS)
-                .queryParam("search", "patient.drug.openfda.product_ndc:\"" + productNdc + "\"")
+                .queryParam("search", "patient.drug.openfda.product_ndc:" + productNdc + "")
                 .queryParam("limit", "10");
-        result.setEvents(eventsTarget.request(MediaType.APPLICATION_JSON_TYPE).get(EventNode.class));
-//        result.setEnforcements(target.request(MediaType.APPLICATION_JSON_TYPE).get(EnforcementNode.class));
-        return result;
+        
+        // something like https://api.fda.gov/drug/event.json?search=patient.drug.openfda.product_ndc:76237-113&limit=10
+        EventResponse events = eventsTarget.request(MediaType.APPLICATION_JSON_TYPE).get(EventResponse.class);
+        detail.setEvents(events);
+        
+        WebTarget enforcementTarget = ClientBuilder.newClient().target(BASE_URL)
+                .path(PATH_ENFORCEMENT)
+                .queryParam("search", "product_ndc:" + productNdc + "")
+                .queryParam("limit", "10");
+        // something like https://api.fda.gov/drug/enforcement.json?search=product_ndc:76237-113&limit=10
+        EnforcementResponse enforcement = enforcementTarget.request(MediaType.APPLICATION_JSON_TYPE).get(EnforcementResponse.class);
+        detail.setEnforcements(enforcement);
+        return detail;
     }
     
-    public static OpenFdaResponse getNewLabelResponse(String drugName, String productNdc) {
-        OpenFdaResponse result = null;
+    public static DrugDetailNode getNewLDrugDetail(String drugName, String productNdc) {
+        DrugDetailNode result = null;
         try {
-            result = getNewLabelResponse(productNdc);
+            result = getDrugDetailResponse(productNdc);
         } catch (Exception nfe) {
-            result = new OpenFdaResponse();
-            result.setError("Nothing found for " + drugName + ":" + productNdc);
+            result = new DrugDetailNode();
+            result.setError("Nothing found for " + drugName + ":" + productNdc + " " + nfe.toString());
             nfe.printStackTrace();
         }
         return result;
