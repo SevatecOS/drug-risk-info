@@ -84,7 +84,21 @@
             <!-- Row (which is basically the Results panel)-->
             <div ng-show="result" class="row"><div class="col-xs-12"> <!-- and a single column the full width of the viewport -->
                 <!-- START: The tabs for Label, Events, and Enforcements -->
-                <div style="width: 50%; display: block; margin-left: auto; margin-right: auto; margin-top: 1em; margin-bottom: 1em; word-wrap: break-word;">
+                <div style="width: 75%; display: block; margin-left: auto; margin-right: auto; margin-top: 1em; margin-bottom: 1em; word-wrap: break-word;">
+                    <!-- START: Panel above the tabs to show the drug name information -->
+                    <div ng-show="result.label.results[0].openfda.brand_name[0]" class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><b>{{result.label.results[0].openfda.brand_name[0]}}</b></h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="list-group">
+                                <li ng-show="result.label.results[0].openfda.brand_name[0]" class="list-group-item"><b>Brand Name: </b>{{result.label.results[0].openfda.brand_name[0]}}</li>
+                                <li ng-show="result.label.results[0].openfda.manufacturer_name[0]" class="list-group-item"><b>Manufacturer Name: </b>{{result.label.results[0].openfda.manufacturer_name[0]}}</li>
+                                <li ng-show="result.label.results[0].openfda.generic_name[0]" class="list-group-item"><b>Generic Name(s): </b>{{result.label.results[0].openfda.generic_name[0]}}</li>
+                            </ul>
+                        </div>
+                    </div>                    
+                        
                     <!-- START: Declare the three tabs -->
                     <ul class="nav nav-tabs" role="tablist">
                       <li role="presentation" class="active"><a href="#label" aria-controls="label" role="tab" data-toggle="tab">Label</a></li>
@@ -97,58 +111,176 @@
                         <!-- START: Label Pane -->
                         <div role="tabpanel" class="tab-pane active" id="label">
                             <div class="panel panel-default"> <!-- START: Panel Definition -->
-                                <div class="panel-body"> <!-- START: Panel Body -->
+                                <div class="panel-body"> <!-- START: Panel Group Body -->
                                     <!-- START: Panel group for all of the accordions within Label -->
                                     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                                         <!-- START: Panel for Indications and Usage -->                
                                         <div ng-show="result.label.results[0].indications_and_usage[0]" class="panel panel-default">
+                                            <!-- START: Header for panel -->
                                             <div class="panel-heading" role="tab" id="phIndications">
                                                 <h4 class="panel-title">
                                                     <a role="button" data-toggle="collapse" data-parent="#accordion" href="#cIndications" aria-expanded="true" aria-controls="cIndications">
                                                         Indications and Usage
                                                     </a>
                                                 </h4>
-                                            </div>
+                                            </div> <!-- END: Header for panel -->
+                                            <!-- START: Body for panel -->
                                             <div id="cIndications" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="phIndications">
                                                 <div class="panel-body">
                                                     {{result.label.results[0].indications_and_usage[0]}} 
                                                 </div>
-                                            </div>
+                                            </div> <!-- END: Body for panel -->
                                         </div> <!-- END: Panel for Indications and Usage -->  
 
                                         <!-- START: Panel for Dosage and Administration -->
                                         <div ng-show="result.label.results[0].dosage_and_administration[0]" class="panel panel-default">
+                                            <!-- START: Header for panel -->
                                             <div class="panel-heading" role="tab" id="phDosage">
                                                 <h4 class="panel-title">
                                                     <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#cDosage" aria-expanded="false" aria-controls="cDosage">
                                                         Dosage and Administration
                                                     </a>
                                                 </h4>
-                                            </div>
+                                            </div> <!-- END: Header for panel -->
+                                            <!-- START: Body for panel -->
                                             <div id="cDosage" class="panel-collapse collapse" role="tabpanel" aria-labelledby="phDosage">
                                                 <div class="panel-body">
                                                     {{result.label.results[0].dosage_and_administration[0]}} 
                                                 </div>
-                                            </div>
+                                            </div> <!-- END: Body for panel -->
                                         </div> <!-- END: Panel for Dosage and Administration -->
 
-                                        <!-- START: Panel for Purpose Table -->
-                                        <div ng-show="test" class="panel panel-default">
-                                            <div class="panel-heading" role="tab" id="headingThree">
+                                        <!-- START: Panel for Purpose -->
+                                        <div ng-show="purposeTable" class="panel panel-default">
+                                            <!-- START: Header for panel -->
+                                            <div class="panel-heading" role="tab" id="phPurpose">
                                                 <h4 class="panel-title">
-                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                        Purpose Table
+                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#cPurpose" aria-expanded="false" aria-controls="cPurpose">
+                                                        Purpose
                                                     </a>
                                                 </h4>
-                                            </div>
-                                            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                            </div> <!-- END: Header for panel -->
+                                            <!-- START: Body for panel -->
+                                            <div id="cPurpose" class="panel-collapse collapse" role="tabpanel" aria-labelledby="phPurpose">
                                                 <div style="align: center;" class="panel-body">
-                                                    <div ng-bind-html="test"></div>       
+                                                    <div ng-show="result.label.results[0].purpose[0]"><i>{{result.label.results[0].purpose[0]}}</i></div><br>
+                                                    <div ng-bind-html="purposeTable"></div>       
                                                 </div>
-                                            </div>
-                                        </div> <!-- END: Panel for Purpose Table -->
+                                            </div> <!-- END: Body for panel -->
+                                        </div> <!-- END: Panel for Purpose -->
+
+                                        <!-- START: Panel for Package Labels -->
+                                        <div ng-show="result.label.results[0].package_label_principal_display_panel" class="panel panel-default">
+                                            <!-- START: Header for panel -->
+                                            <div class="panel-heading" role="tab" id="phPackageLabel">
+                                                <h4 class="panel-title">
+                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#cPackageLabel" aria-expanded="false" aria-controls="cPackageLabel">
+                                                        Package Label(s)
+                                                    </a>
+                                                </h4>
+                                            </div> <!-- END: Header for panel -->
+                                            <!-- START: Body for panel -->
+                                            <div id="cPackageLabel" class="panel-collapse collapse" role="tabpanel" aria-labelledby="phPackageLabel">
+                                                <div style="align: center;" class="panel-body">
+                                                    <ul class="list-group">
+                                                        <div ng-repeat="packageLabel in result.label.results[0].package_label_principal_display_panel">
+                                                            <li class="list-group-item">{{packageLabel}}</li>
+                                                           </div>  
+                                                    </ul>                                                    
+                                                </div>
+                                            </div> <!-- END: Body for panel -->
+                                        </div> <!-- END: Panel for Package Labels -->
+                                        
+                                         <!-- START: Panel for Ingredients -->
+                                        <div ng-show="result.label.results[0].active_ingredient || result.label.results[0].inactive_ingredient" class="panel panel-default">
+                                            <!-- START: Header for panel -->
+                                            <div class="panel-heading" role="tab" id="phIngredients">
+                                                <h4 class="panel-title">
+                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#cIngredients" aria-expanded="false" aria-controls="cIngredients">
+                                                        Ingredients
+                                                    </a>
+                                                </h4>
+                                            </div> <!-- END: Header for panel -->
+                                            <!-- START: Body for panel -->
+                                            <div id="cIngredients" class="panel-collapse collapse" role="tabpanel" aria-labelledby="phIngredients">
+                                                <div style="align: center;" class="panel-body">
+                                                    <ul class="list-group">
+                                                        <li ng-show="result.label.results[0].active_ingredient" class="list-group-item">
+                                                            <b>Active Ingredients: </b>{{result.label.results[0].active_ingredient[0]}}<br/><br/>
+                                                            <div ng-bind-html="activeIngredientTable"></div> 
+                                                        </li>
+                                                        <li ng-show="result.label.results[0].inactive_ingredient" class="list-group-item"><b>Inactive Ingredients: </b>{{result.label.results[0].inactive_ingredient[0]}}</li>
+                                                    </ul>                                                  
+                                                </div>
+                                            </div> <!-- END: Body for panel -->
+                                        </div> <!-- END: Panel for Ingredients -->
+                                        
+                                        <!-- START: Panel for Warnings and Indications -->
+                                        <div class="panel panel-default">
+                                            <!-- START: Header for panel -->
+                                            <div class="panel-heading" role="tab" id="phWarnings">
+                                                <h4 class="panel-title">
+                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#cWarnings" aria-expanded="false" aria-controls="cWarnings">
+                                                        Warnings and Indications
+                                                    </a>
+                                                </h4>
+                                            </div> <!-- END: Header for panel -->
+                                            <!-- START: Body for panel -->
+                                            <div id="cWarnings" class="panel-collapse collapse" role="tabpanel" aria-labelledby="phWarnings">
+                                                <div style="align: center;" class="panel-body">
+                                                     <ul class="list-group">
+                                                        <li ng-show="result.label.results[0].abuse" class="list-group-item">{{result.label.results[0].abuse[0]}}</li>
+                                                        <li ng-show="result.label.results[0].adverse_reactions" class="list-group-item">{{result.label.results[0].adverse_reactions[0]}}</li>
+                                                        <li ng-show="result.label.results[0].ask_doctor" class="list-group-item">{{result.label.results[0].ask_doctor[0]}}</li>
+                                                        <li ng-show="result.label.results[0].ask_doctor_or_pharmacist" class="list-group-item">{{result.label.results[0].ask_doctor_or_pharmacist[0]}}</li>
+                                                        <li ng-show="result.label.results[0].boxed_warning" class="list-group-item">{{result.label.results[0].boxed_warning[0]}}</li>
+                                                        <li ng-show="result.label.results[0].carcinogenesis_and_mutagenesis_and_impairment_of_fertility" class="list-group-item">{{result.label.results[0].carcinogenesis_and_mutagenesis_and_impairment_of_fertility[0]}}</li>
+                                                        <li ng-show="result.label.results[0].clinical_pharmacology" class="list-group-item">
+                                                                {{result.label.results[0].clinical_pharmacology[0]}}<br/><br/>
+                                                                <div ng-bind-html="clinicalPharmacologyTable"></div>
+                                                        </li>
+                                                        <li ng-show="result.label.results[0].contraindications" class="list-group-item">{{result.label.results[0].contraindications[0]}}</li>
+                                                        <li ng-show="result.label.results[0].controlled_substance" class="list-group-item">{{result.label.results[0].controlled_substance[0]}}</li>
+                                                        <li ng-show="result.label.results[0].dependence" class="list-group-item">{{result.label.results[0].dependence[0]}}</li>
+                                                        <li ng-show="result.label.results[0].description" class="list-group-item">{{result.label.results[0].description[0]}}</li>
+                                                        <li ng-show="result.label.results[0].do_not_use" class="list-group-item">{{result.label.results[0].do_not_use[0]}}</li>
+                                                        <li ng-show="result.label.results[0].drug_abuse_and_dependence" class="list-group-item">{{result.label.results[0].drug_abuse_and_dependence[0]}}</li>
+                                                        <li ng-show="result.label.results[0].drug_and_or_laboratory_test_interactions" class="list-group-item">{{result.label.results[0].drug_and_or_laboratory_test_interactions[0]}}</li>
+                                                        <li ng-show="result.label.results[0].drug_interactions" class="list-group-item">{{result.label.results[0].drug_interactions[0]}}</li>
+                                                        <li ng-show="result.label.results[0].general_precautions" class="list-group-item">{{result.label.results[0].general_precautions[0]}}</li>
+                                                        <li ng-show="result.label.results[0].how_supplied" class="list-group-item">{{result.label.results[0].how_supplied[0]}}</li>
+                                                        <li ng-show="result.label.results[0].information_for_patients" class="list-group-item">{{result.label.results[0].information_for_patients[0]}}</li>
+                                                        <li ng-show="result.label.results[0].keep_out_of_reach_of_children" class="list-group-item">{{result.label.results[0].keep_out_of_reach_of_children[0]}}</li>
+                                                        <li ng-show="result.label.results[0].labor_and_delivery" class="list-group-item">{{result.label.results[0].labor_and_delivery[0]}}</li>
+                                                        <li ng-show="result.label.results[0].laboratory_tests" class="list-group-item">{{result.label.results[0].laboratory_tests[0]}}</li>
+                                                        <li ng-show="result.label.results[0].nonteratogenic_effects" class="list-group-item">{{result.label.results[0].nonteratogenic_effects[0]}}</li>
+                                                        <li ng-show="result.label.results[0].nursing_mothers" class="list-group-item">{{result.label.results[0].nursing_mothers[0]}}</li>
+                                                        <li ng-show="result.label.results[0].overdosage" class="list-group-item">{{result.label.results[0].overdosage[0]}}</li>
+                                                        <li ng-show="result.label.results[0].pediatric_use" class="list-group-item">{{result.label.results[0].pediatric_use[0]}}</li>
+                                                        <li ng-show="result.label.results[0].pharmacodynamics" class="list-group-item">
+                                                                {{result.label.results[0].pharmacodynamics[0]}}<br/><br/>
+                                                                <div ng-bind-html="pharmacodynamicsTable"></div>
+                                                        </li>
+                                                        <li ng-show="result.label.results[0].pharmacokinetics" class="list-group-item">
+                                                                {{result.label.results[0].pharmacokinetics[0]}}<br/><br/>
+                                                                <div ng-bind-html="pharmacokineticsTable"></div>
+                                                        </li>
+                                                        <li ng-show="result.label.results[0].precautions" class="list-group-item">{{result.label.results[0].precautions[0]}}</li>
+                                                        <li ng-show="result.label.results[0].pregnancy_or_breast_feeding" class="list-group-item">{{result.label.results[0].pregnancy_or_breast_feeding[0]}}</li>
+                                                        <li ng-show="result.label.results[0].questions" class="list-group-item">{{result.label.results[0].questions[0]}}</li>
+                                                        <li ng-show="result.label.results[0].stop_use" class="list-group-item">{{result.label.results[0].stop_use[0]}}</li>
+                                                        <li ng-show="result.label.results[0].storage_and_handling" class="list-group-item">{{result.label.results[0].storage_and_handling[0]}}</li>
+                                                        <li ng-show="result.label.results[0].warnings" class="list-group-item">
+                                                            {{result.label.results[0].warnings[0]}}<br/><br/>
+                                                            <div ng-bind-html="warningsTable"></div> 
+                                                        </li>
+                                                    </ul>                                                    
+                                                </div>
+                                            </div> <!-- END: Body for panel -->
+                                        </div> <!-- END: Panel for Warnings and Indications -->
+
                                     </div> <!-- END: Panel group for all of the accordions within Label -->       
-                                </div> <!-- END: Panel Body -->
+                                </div> <!-- END: Panel Group Body -->
                             </div> <!-- END: Panel Definition -->
                         </div> <!-- END: Label Pane -->
 

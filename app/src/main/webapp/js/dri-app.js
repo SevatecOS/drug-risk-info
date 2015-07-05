@@ -2,8 +2,16 @@ var app = angular.module('dri-app', ["ngTouch", "angucomplete-alt", "ngRoute"]);
 var xmlHttp = null;
 
 app.controller("dri-app-ctrl", function ($scope, $sce, $http) {
+    // Overall result
     $scope.result = null;
-    $scope.test = null;
+    
+    // Result elements with HTML data
+    $scope.activeIngredientTable = null;
+    $scope.clinicalPharmacologyTable = null;
+    $scope.pharmacodynamicsTable = null;
+    $scope.pharmacokineticsTable = null;
+    $scope.purposeTable = null;
+    $scope.warningsTable = null;
 
     $scope.doGetFromServer = function (selected) {
         var drugName = selected.originalObject.name;
@@ -12,7 +20,12 @@ app.controller("dri-app-ctrl", function ($scope, $sce, $http) {
             $http.get('rest/services/getDrugDetail/' + drugName).
                     success(function (data, status, headers, config) {
                         $scope.result = data;
-                        $scope.test = $sce.trustAsHtml(data.label.results[0].purpose_table[0]);
+                        $scope.activeIngredientTable = $sce.trustAsHtml(data.label.results[0].active_ingredient_table[0]);
+                        $scope.clinicalPharmacologyTable = $sce.trustAsHtml(data.label.results[0].clinical_pharmacology_table[0]);
+                        $scope.pharmacodynamicsTable = $sce.trustAsHtml(data.label.results[0].pharmacodynamics_table[0]);
+                        $scope.pharmacokineticsTable = $sce.trustAsHtml(data.label.results[0].pharmacokinetics_table[0]);
+                        $scope.purposeTable = $sce.trustAsHtml(data.label.results[0].purpose_table[0]);
+                        $scope.warningsTable = $sce.trustAsHtml(data.label.results[0].warnings_table[0]);
                     }).
                     error(function (data, status, headers, config) {
                         $scope.result = data;
