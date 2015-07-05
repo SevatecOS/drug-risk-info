@@ -101,9 +101,9 @@
                         
                     <!-- START: Declare the three tabs -->
                     <ul class="nav nav-tabs" role="tablist">
-                      <li role="presentation" class="active"><a href="#label" aria-controls="label" role="tab" data-toggle="tab">Label</a></li>
-                      <li role="presentation"><a href="#events" aria-controls="events" role="tab" data-toggle="tab">Adverse Events</a></li>
-                      <li role="presentation"><a href="#enforcements" aria-controls="enforcements" role="tab" data-toggle="tab">Enforcements</a></li>
+                      <li role="presentation" class="active"><a href="#label" aria-controls="label" role="tab" data-toggle="{{result.label.results && 'tab' || '' }}">Label</a></li>
+                      <li role="presentation"><a href="#events" aria-controls="events" role="tab" data-toggle="{{result.events.results && 'tab' || '' }}"><span style="{{result.events.results && ';' || 'color: LightGray;' }}">Adverse Events</span></a></li>
+                      <li role="presentation"><a href="#enforcements" aria-controls="enforcements" role="tab" data-toggle="{{result.enforcements.results && 'tab' || '' }}"><span style="{{result.enforcements.results && ';' || 'color: LightGray;' }}">Enforcements</span></a></li>
                     </ul> <!-- END: Declare the three tabs -->
 
                     <!-- START: Tab panes -->
@@ -288,7 +288,57 @@
                         <div role="tabpanel" class="tab-pane" id="events">
                             <div class="panel panel-default"> <!-- START: Panel Definition -->
                                 <div class="panel-body"> <!-- START: Panel Body -->
-                                    {{result.events}}
+                                    <div style="align: center;" class="panel-body">
+                                        <div ng-repeat="event in result.events.results">
+                                            <div class="panel panel-default">
+                                                <!-- START: Header for panel -->
+                                                <div class="panel-heading" role="tab" id="phAdverseEvents{{$index+1}}">
+                                                    <h4 class="panel-title">
+                                                        <a style="text-decoration: none;" class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#cAdverseEvents{{$index+1}}" aria-expanded="false" aria-controls="cAdverseEvents{{$index+1}}">
+                                                            <span class="label label-default">{{$index+1}}</span>&nbsp;Event report&nbsp;<b>{{event.safetyreportid}}</b> on {{event.receiptdate+'T120201Z' | date}} in {{event.primarysourcecountry}}<span ng-show="event.companynumb"> re: {{event.companynumb}}</span>
+                                                        </a>
+                                                    </h4>
+                                                </div> <!-- END: Header for panel -->
+                                                <!-- START: Body for panel -->
+                                                <div id="cAdverseEvents{{$index+1}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="phAdverseEvents{{$index+1}}">
+                                                    <div style="align: center;" class="panel-body">
+                                                        <div ng-switch on="{{event.patient.patientonsetageunit}}">
+                                                            <div ng-switch-when="800"><b>Reaction by {{event.patient.patientonsetage}} decade(s), {{event.patient.patientsex === 1 && 'male' || 'female' }}</b></div>
+                                                            <div ng-switch-when="801"><b>Reaction by {{event.patient.patientonsetage}} years(s), {{event.patient.patientsex === 1 && 'male' || 'female' }}</b></div>
+                                                            <div ng-switch-when="802"><b>Reaction by {{event.patient.patientonsetage}} months(s), {{event.patient.patientsex === 1 && 'male' || 'female' }}</b></div>
+                                                            <div ng-switch-when="803"><b>Reaction by {{event.patient.patientonsetage}} week(s), {{event.patient.patientsex === 1 && 'male' || 'female' }}</b></div>
+                                                            <div ng-switch-when="804"><b>Reaction by {{event.patient.patientonsetage}} day(s), {{event.patient.patientsex === 1 && 'male' || 'female' }}</b></div>
+                                                            <div ng-switch-when="805"><b>Reaction by {{event.patient.patientonsetage}} hour(s), {{event.patient.patientsex === 1 && 'male' || 'female' }}</b></div>
+                                                            <div ng-switch-default><b>Reaction by {{event.patient.patientsex === 1 && 'male' || 'female' }}</b></div>
+                                                        </div>
+                                                        <ul>     
+                                                            <div ng-repeat="reaction in event.patient.reaction">
+                                                                <div ng-switch on="{{reaction.reactionoutcome}}">
+                                                                    <div ng-switch-when="1"><li>{{reaction.reactionmeddrapt}}, recovered/resolved.</li></div>
+                                                                    <div ng-switch-when="2"><li>{{reaction.reactionmeddrapt}}, recovering/resolving.</li></div>
+                                                                    <div ng-switch-when="3"><li>{{reaction.reactionmeddrapt}}, not recovered/not resolved.</li></div>
+                                                                    <div ng-switch-when="4"><li>{{reaction.reactionmeddrapt}}, recovered/resolved with sequelae.</li></div>
+                                                                    <div ng-switch-when="5"><li>{{reaction.reactionmeddrapt}}, fatal.</li></div>
+                                                                    <div ng-switch-default><li>{{reaction.reactionmeddrapt}}, unknown outcome.</li></div>
+                                                                </div>
+                                                            </div>
+                                                        </ul>
+                                                        <b>Potential related drugs(s)</b>
+                                                        <ul>     
+                                                            <div ng-repeat="drug in event.patient.drug">
+                                                                <div ng-switch on="{{drug.drugcharacterization}}">
+                                                                    <div ng-switch-when="1"><li>{{drug.medicinalproduct}} {{drug.drugdosageform}}, suspect.</li></div>
+                                                                    <div ng-switch-when="2"><li>{{drug.medicinalproduct}} {{drug.drugdosageform}}, concomitant.</li></div>
+                                                                    <div ng-switch-when="3"><li>{{drug.medicinalproduct}} {{drug.drugdosageform}}, interacting.</li></div>
+                                                                    <div ng-switch-default><li>{{drug.medicinalproduct}} {{drug.drugdosageform}}, unknown relation.</li></div>
+                                                                </div>
+                                                            </div>
+                                                        </ul>
+                                                    </div>
+                                                </div> <!-- END: Body for panel -->
+                                            </div> 
+                                        </div>  
+                                    </div>
                                 </div> <!-- END: Panel Body -->
                             </div> <!-- END: Panel Definition -->
                         </div> <!-- END: Events Pane -->
