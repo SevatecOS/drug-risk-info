@@ -1,12 +1,9 @@
 /* global angular */
-
 var app = angular.module('dri-app', ['ngTouch', 'angucomplete-alt', 'ngRoute']);
-var xmlHttp = null;
 
 app.controller("dri-app-ctrl", function ($scope, $sce, $http) {
     // Overall result
     $scope.result = null;
-    $scope.searchItem = null;
     
     // Result elements with HTML data
     $scope.activeIngredientTable = null;
@@ -69,5 +66,9 @@ app.controller("dri-app-ctrl", function ($scope, $sce, $http) {
     $('#enforcements a').click(function (e) {
         e.preventDefault();
         $(this).tab('enforcements');
-    });
+    });    
 });
+
+
+
+

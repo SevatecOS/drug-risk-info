@@ -88,8 +88,7 @@
                         Most Popular Recent Searches
                     </a>
                     <div ng-repeat="recentsearch in recentsearches">
-
-                        <a href="#" onclick="$('drugsID').myInitialValue('tylenol');" class="list-group-item">
+                        <a href="#{{recentsearch.searchName}}" onclick="document.getElementById('drugsID').setValue('placeholder','TEST');" class="list-group-item">
                             <span class="badge">{{recentsearch.views}}</span>
                             {{recentsearch.searchName}}
                         </a>
@@ -320,7 +319,7 @@
                                                 <!-- START: Header for panel -->
                                                 <div class="panel-heading" role="tab" id="phAdverseEvents{{$index+1}}">
                                                     <h4 class="panel-title">
-                                                        <a style="text-decoration: none;" class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#cAdverseEvents{{$index+1}}" aria-expanded="false" aria-controls="cAdverseEvents{{$index+1}}">
+                                                        <a style="text-decoration: none; line-height: 180%;" class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#cAdverseEvents{{$index+1}}" aria-expanded="false" aria-controls="cAdverseEvents{{$index+1}}">
                                                             <span class="label label-default">{{$index+1}}</span>&nbsp;Event report&nbsp;<b>{{event.safetyreportid}}</b> on {{event.receiptdate+'T120101Z' | date}} in {{event.primarysourcecountry}}<span ng-show="event.companynumb"> re: {{event.companynumb}}</span>
                                                         </a>
                                                     </h4>
@@ -377,7 +376,7 @@
                                         <div class="panel panel-default">
                                             <!-- START: Header for panel -->
                                             <div class="panel-heading" role="tab" id="phEnforcements{{$index+1}}">
-                                                <h4 class="panel-title">
+                                                <h4 class="panel-title" style="line-height: 180%;">
                                                     <a style="text-decoration: none;" class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#cEnforcements{{$index+1}}" aria-expanded="false" aria-controls="cEnforcements{{$index+1}}">
                                                         <span class="label label-default">{{$index+1}}</span>&nbsp;Recall&nbsp;<b>{{enforce.recall_number}}</b> on {{enforce.recall_initiation_date+'T120101Z' | date}}</span>
                                                     </a>
