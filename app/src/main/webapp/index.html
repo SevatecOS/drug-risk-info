@@ -87,8 +87,8 @@
                     <a href="#" class="list-group-item active">
                         Most Popular Recent Searches
                     </a>
-                    <div ng-repeat="recentsearch in recentsearches">
-                        <a href="#{{recentsearch.searchName}}" onclick="document.getElementById('drugsID').setValue('placeholder','TEST');" class="list-group-item">
+                    <div ng-repeat="recentsearch in recentsearches" ng-if="recentsearch.views >3">
+                        <a href="#{{recentsearch.searchName}}" onclick="" class="list-group-item">
                             <span class="badge">{{recentsearch.views}}</span>
                             {{recentsearch.searchName}}
                         </a>
