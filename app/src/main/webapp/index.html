@@ -66,8 +66,21 @@
                      input-class="form-control form-control-small"
                      match-class="highlight" 
                      style="width: 50%; display: block; margin-left: auto; margin-right: auto;"
-                     clear-selected="true">
+                     >
                 </div> <!-- autocomplet-alt -->
+                <br/>
+                <br/>
+                <ul style="width: 40%; display: block; margin-left: auto; margin-right: auto;" class="list-group">
+                    <a href="#" class="list-group-item active">
+                        Most Popular Recent Searches
+                    </a>
+                    <div ng-repeat="recentsearch in recentsearches">
+                        <a href="#" class="list-group-item">
+                            <span class="badge">{{recentsearch.views}}</span>
+                            {{recentsearch.searchName}}
+                        </a>
+                    </div>
+                </ul>
             </div></div> <!-- col, row -->
 
             <!--
@@ -84,7 +97,7 @@
             <!-- Row (which is basically the Results panel)-->
             <div ng-show="result" class="row"><div class="col-xs-12"> <!-- and a single column the full width of the viewport -->
                 <!-- START: The tabs for Label, Events, and Enforcements -->
-                <div style="width: 75%; display: block; margin-left: auto; margin-right: auto; margin-top: 1em; margin-bottom: 1em; word-wrap: break-word;">
+                <div style="width: 75%; display: block; margin-left: auto; margin-right: auto; margin-top: 3em; margin-bottom: 1em; word-wrap: break-word;">
                     <!-- START: Panel above the tabs to show the drug name information -->
                     <div ng-show="result.label.results[0].openfda.brand_name[0]" class="panel panel-primary">
                         <div class="panel-heading">
@@ -101,9 +114,9 @@
                         
                     <!-- START: Declare the three tabs -->
                     <ul class="nav nav-tabs" role="tablist">
-                      <li role="presentation" class="active"><a href="#label" aria-controls="label" role="tab" data-toggle="tab">Label</a></li>
-                      <li role="presentation"><a href="#events" aria-controls="events" role="tab" data-toggle="tab">Adverse Events</a></li>
-                      <li role="presentation"><a href="#enforcements" aria-controls="enforcements" role="tab" data-toggle="tab">Enforcements</a></li>
+                      <li role="presentation" class="active"><a href="#label" aria-controls="label" role="tab" data-toggle="{{result.label.results && 'tab' || '' }}"><span style="{{result.label.results && ';' || 'color: LightGray;' }}">Label</span></a></li>
+                      <li role="presentation"><a href="#events" aria-controls="events" role="tab" data-toggle="{{result.events.results && 'tab' || '' }}"><span style="{{result.events.results && ';' || 'color: LightGray;' }}">Adverse Events</span></a></li>
+                      <li role="presentation"><a href="#enforcements" aria-controls="enforcements" role="tab" data-toggle="{{result.enforcements.results && 'tab' || '' }}"><span style="{{result.enforcements.results && ';' || 'color: LightGray;' }}">Enforcements</span></a></li>
                     </ul> <!-- END: Declare the three tabs -->
 
                     <!-- START: Tab panes -->
@@ -185,7 +198,7 @@
                                                     <ul class="list-group">
                                                         <div ng-repeat="packageLabel in result.label.results[0].package_label_principal_display_panel">
                                                             <li class="list-group-item">{{packageLabel}}</li>
-                                                           </div>  
+                                                        </div>  
                                                     </ul>                                                    
                                                 </div>
                                             </div> <!-- END: Body for panel -->
@@ -288,7 +301,57 @@
                         <div role="tabpanel" class="tab-pane" id="events">
                             <div class="panel panel-default"> <!-- START: Panel Definition -->
                                 <div class="panel-body"> <!-- START: Panel Body -->
-                                    {{result.events}}
+                                    <div style="align: center;" class="panel-body">
+                                        <div ng-repeat="event in result.events.results">
+                                            <div class="panel panel-default">
+                                                <!-- START: Header for panel -->
+                                                <div class="panel-heading" role="tab" id="phAdverseEvents{{$index+1}}">
+                                                    <h4 class="panel-title">
+                                                        <a style="text-decoration: none;" class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#cAdverseEvents{{$index+1}}" aria-expanded="false" aria-controls="cAdverseEvents{{$index+1}}">
+                                                            <span class="label label-default">{{$index+1}}</span>&nbsp;Event report&nbsp;<b>{{event.safetyreportid}}</b> on {{event.receiptdate+'T120101Z' | date}} in {{event.primarysourcecountry}}<span ng-show="event.companynumb"> re: {{event.companynumb}}</span>
+                                                        </a>
+                                                    </h4>
+                                                </div> <!-- END: Header for panel -->
+                                                <!-- START: Body for panel -->
+                                                <div id="cAdverseEvents{{$index+1}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="phAdverseEvents{{$index+1}}">
+                                                    <div style="align: center;" class="panel-body">
+                                                        <div ng-switch on="{{event.patient.patientonsetageunit}}">
+                                                            <div ng-switch-when="800"><b>Reaction by {{event.patient.patientonsetage}} decade(s), {{event.patient.patientsex == 1 && 'male' || 'female' }}</b></div>
+                                                            <div ng-switch-when="801"><b>Reaction by {{event.patient.patientonsetage}} years(s), {{event.patient.patientsex == 1 && 'male' || 'female' }}</b></div>
+                                                            <div ng-switch-when="802"><b>Reaction by {{event.patient.patientonsetage}} months(s), {{event.patient.patientsex == 1 && 'male' || 'female' }}</b></div>
+                                                            <div ng-switch-when="803"><b>Reaction by {{event.patient.patientonsetage}} week(s), {{event.patient.patientsex == 1 && 'male' || 'female' }}</b></div>
+                                                            <div ng-switch-when="804"><b>Reaction by {{event.patient.patientonsetage}} day(s), {{event.patient.patientsex == 1 && 'male' || 'female' }}</b></div>
+                                                            <div ng-switch-when="805"><b>Reaction by {{event.patient.patientonsetage}} hour(s), {{event.patient.patientsex == 1 && 'male' || 'female' }}</b></div>
+                                                            <div ng-switch-default><b>Reaction by {{event.patient.patientsex == 1 && 'male' || 'female' }}</b></div>
+                                                        </div>
+                                                        <ul>     
+                                                            <div ng-repeat="reaction in event.patient.reaction">
+                                                                <div ng-switch on="{{reaction.reactionoutcome}}">
+                                                                    <div ng-switch-when="1"><li>{{reaction.reactionmeddrapt}}, recovered/resolved.</li></div>
+                                                                    <div ng-switch-when="2"><li>{{reaction.reactionmeddrapt}}, recovering/resolving.</li></div>
+                                                                    <div ng-switch-when="3"><li>{{reaction.reactionmeddrapt}}, not recovered/not resolved.</li></div>
+                                                                    <div ng-switch-when="4"><li>{{reaction.reactionmeddrapt}}, recovered/resolved with sequelae.</li></div>
+                                                                    <div ng-switch-when="5"><li>{{reaction.reactionmeddrapt}}, fatal.</li></div>
+                                                                    <div ng-switch-default><li>{{reaction.reactionmeddrapt}}, unknown outcome.</li></div>
+                                                                </div>
+                                                            </div>
+                                                        </ul>
+                                                        <b>Potential related drugs(s)</b>
+                                                        <ul>     
+                                                            <div ng-repeat="drug in event.patient.drug">
+                                                                <div ng-switch on="{{drug.drugcharacterization}}">
+                                                                    <div ng-switch-when="1"><li>{{drug.medicinalproduct}} {{drug.drugdosageform}}, suspect.</li></div>
+                                                                    <div ng-switch-when="2"><li>{{drug.medicinalproduct}} {{drug.drugdosageform}}, concomitant.</li></div>
+                                                                    <div ng-switch-when="3"><li>{{drug.medicinalproduct}} {{drug.drugdosageform}}, interacting.</li></div>
+                                                                    <div ng-switch-default><li>{{drug.medicinalproduct}} {{drug.drugdosageform}}, unknown relation.</li></div>
+                                                                </div>
+                                                            </div>
+                                                        </ul>
+                                                    </div>
+                                                </div> <!-- END: Body for panel -->
+                                            </div> 
+                                        </div>  
+                                    </div>
                                 </div> <!-- END: Panel Body -->
                             </div> <!-- END: Panel Definition -->
                         </div> <!-- END: Events Pane -->
@@ -297,14 +360,42 @@
                         <div role="tabpanel" class="tab-pane" id="enforcements">
                             <div class="panel panel-default"> <!-- START: Panel Definition -->
                                 <div class="panel-body"> <!-- START: Panel Body -->
-                                    {{result.enforcements}}
-                                </div> <!-- END: Panel Body -->
-                            </div> <!-- END: Panel Definition -->
-                        </div> <!-- END: Enforcements Pane -->
-                    </div> <!-- END: Tab panes -->    
-                </div> <!-- END: The tabs for Label, Events, and Enforcements -->                  
-            </div></div> <!-- col, row -->
-
+                                    <div ng-repeat="enforce in result.enforcements.results">
+                                        <div class="panel panel-default">
+                                            <!-- START: Header for panel -->
+                                            <div class="panel-heading" role="tab" id="phEnforcements{{$index+1}}">
+                                                <h4 class="panel-title">
+                                                    <a style="text-decoration: none;" class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#cEnforcements{{$index+1}}" aria-expanded="false" aria-controls="cEnforcements{{$index+1}}">
+                                                        <span class="label label-default">{{$index+1}}</span>&nbsp;Recall&nbsp;<b>{{enforce.recall_number}}</b> on {{enforce.recall_initiation_date+'T120101Z' | date}}</span>
+                                                    </a>
+                                                </h4>
+                                            </div> <!-- END: Header for panel -->
+                                            <!-- START: Body for panel -->
+                                            <div id="cEnforcements{{$index+1}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="phEnforcements{{$index+1}}">
+                                                <div style="align: center;" class="panel-body">
+                                                    <ul>     
+                                                        <li><b>Reason for Recall</b><br/>{{enforce.reason_for_recall}}</li>
+                                                        <li><b>Recalling Firm</b><br/>{{enforce.recalling_firm}}</li>
+                                                        <li><b>Product Description</b><br/>{{enforce.product_description}}</li>
+                                                        <li><b>Product Quantity</b><br/>{{enforce.product_quantity}}</li>
+                                                        <li><b>Distribution Pattern</b><br/>{{enforce.distribution_pattern}}</li>
+                                                        <li><b>Classification</b><br/>{{enforce.classification}}</li>
+                                                        <li><b>Report Date</b><br/>{{enforce.report_date+'T120101Z'| date}}</li>
+                                                        <li><b>Initial Notification</b><br/>{{enforce.initial_firm_notification}}</li>
+                                                        <li><b>Code Info</b><br/>{{enforce.code_info}}</li>
+                                                        <li><b>Status</b><br/>{{enforce.status}}</li>
+                                                        <li><b>Source</b><br/>{{enforce.voluntary_mandated}}</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> <!-- END: Panel Body -->
+                                </div> <!-- END: Panel Definition -->
+                            </div> <!-- END: Enforcements Pane -->
+                        </div> <!-- END: Tab panes -->    
+                    </div> <!-- END: The tabs for Label, Events, and Enforcements -->                  
+                </div></div> <!-- col, row -->
+            </div>
             <!--
 
             FOOTER (SAME FOR ALL PANELS)

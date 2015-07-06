@@ -1,4 +1,6 @@
-var app = angular.module('dri-app', ["ngTouch", "angucomplete-alt", "ngRoute"]);
+/* global angular */
+
+var app = angular.module('dri-app', ['ngTouch', 'angucomplete-alt', 'ngRoute']);
 var xmlHttp = null;
 
 app.controller("dri-app-ctrl", function ($scope, $sce, $http) {
@@ -12,10 +14,19 @@ app.controller("dri-app-ctrl", function ($scope, $sce, $http) {
     $scope.pharmacokineticsTable = null;
     $scope.purposeTable = null;
     $scope.warningsTable = null;
+    $scope.recentsearches = null;
+    
+    $http.get('rest/services/getRecentSearches').
+            success(function(data, status, headers, config){
+                $scope.recentsearches = data;
+            }).
+            error(function(data, status, headers, config){
+                $scope.recentsearches = data;
+            });
 
     $scope.doGetFromServer = function (selected) {
         var drugName = selected.originalObject.name;
-        
+               
         if (selected) {
             $http.get('rest/services/getDrugDetail/' + drugName).
                     success(function (data, status, headers, config) {
@@ -52,6 +63,4 @@ app.controller("dri-app-ctrl", function ($scope, $sce, $http) {
         e.preventDefault();
         $(this).tab('enforcements');
     });   
-    
-
 });
