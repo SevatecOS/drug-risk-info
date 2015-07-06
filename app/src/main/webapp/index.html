@@ -66,8 +66,21 @@
                      input-class="form-control form-control-small"
                      match-class="highlight" 
                      style="width: 50%; display: block; margin-left: auto; margin-right: auto;"
-                     clear-selected="true">
+                     >
                 </div> <!-- autocomplet-alt -->
+                <br/>
+                <br/>
+                <ul style="width: 40%; display: block; margin-left: auto; margin-right: auto;" class="list-group">
+                    <a href="#" class="list-group-item active">
+                        Most Popular Recent Searches
+                    </a>
+                    <div ng-repeat="recentsearch in recentsearches">
+                        <a href="#" class="list-group-item">
+                            <span class="badge">{{recentsearch.views}}</span>
+                            {{recentsearch.searchName}}
+                        </a>
+                    </div>
+                </ul>
             </div></div> <!-- col, row -->
 
             <!--
@@ -101,7 +114,7 @@
                         
                     <!-- START: Declare the three tabs -->
                     <ul class="nav nav-tabs" role="tablist">
-                      <li role="presentation" class="active"><a href="#label" aria-controls="label" role="tab" data-toggle="{{result.label.results && 'tab' || '' }}">Label</a></li>
+                      <li role="presentation" class="active"><a href="#label" aria-controls="label" role="tab" data-toggle="{{result.label.results && 'tab' || '' }}"><span style="{{result.label.results && ';' || 'color: LightGray;' }}">Label</span></a></li>
                       <li role="presentation"><a href="#events" aria-controls="events" role="tab" data-toggle="{{result.events.results && 'tab' || '' }}"><span style="{{result.events.results && ';' || 'color: LightGray;' }}">Adverse Events</span></a></li>
                       <li role="presentation"><a href="#enforcements" aria-controls="enforcements" role="tab" data-toggle="{{result.enforcements.results && 'tab' || '' }}"><span style="{{result.enforcements.results && ';' || 'color: LightGray;' }}">Enforcements</span></a></li>
                     </ul> <!-- END: Declare the three tabs -->
@@ -185,7 +198,7 @@
                                                     <ul class="list-group">
                                                         <div ng-repeat="packageLabel in result.label.results[0].package_label_principal_display_panel">
                                                             <li class="list-group-item">{{packageLabel}}</li>
-                                                           </div>  
+                                                        </div>  
                                                     </ul>                                                    
                                                 </div>
                                             </div> <!-- END: Body for panel -->
@@ -382,7 +395,7 @@
                         </div> <!-- END: Tab panes -->    
                     </div> <!-- END: The tabs for Label, Events, and Enforcements -->                  
                 </div></div> <!-- col, row -->
-
+            </div>
             <!--
 
             FOOTER (SAME FOR ALL PANELS)
