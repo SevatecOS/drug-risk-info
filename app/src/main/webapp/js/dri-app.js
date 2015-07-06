@@ -6,6 +6,7 @@ var xmlHttp = null;
 app.controller("dri-app-ctrl", function ($scope, $sce, $http) {
     // Overall result
     $scope.result = null;
+    $scope.searchItem = null;
     
     // Result elements with HTML data
     $scope.activeIngredientTable = null;
@@ -26,10 +27,13 @@ app.controller("dri-app-ctrl", function ($scope, $sce, $http) {
 
     $scope.doGetFromServer = function (selected) {
         var drugName = selected.originalObject.name;
+        var myModal = $('#myModal');
                
         if (selected) {
+            myModal.find('.modal-body').text(drugName);
+            myModal.modal('show');
             $http.get('rest/services/getDrugDetail/' + drugName).
-                    success(function (data, status, headers, config) {
+                    success(function (data) {
                         $scope.result = data;
                         $scope.activeIngredientTable = $sce.trustAsHtml(data.label.results[0].active_ingredient_table[0]);
                         $scope.clinicalPharmacologyTable = $sce.trustAsHtml(data.label.results[0].clinical_pharmacology_table[0]);
@@ -38,8 +42,11 @@ app.controller("dri-app-ctrl", function ($scope, $sce, $http) {
                         $scope.purposeTable = $sce.trustAsHtml(data.label.results[0].purpose_table[0]);
                         $scope.warningsTable = $sce.trustAsHtml(data.label.results[0].warnings_table[0]);
                     }).
-                    error(function (data, status, headers, config) {
+                    error(function (data, status) {
                         $scope.result = data;
+                    }).
+                    finally(function() {
+                        myModal.modal('hide');                    
                     });
         } else {
             $scope.result = null;
@@ -62,5 +69,5 @@ app.controller("dri-app-ctrl", function ($scope, $sce, $http) {
     $('#enforcements a').click(function (e) {
         e.preventDefault();
         $(this).tab('enforcements');
-    });   
+    });
 });

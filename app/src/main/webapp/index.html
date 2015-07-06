@@ -26,7 +26,6 @@
 
         <!-- Script for application  -->
         <script src="js/dri-app.js"></script>
-        <script src="js/tab.js"></script>
     </head>
 
     <!--
@@ -35,6 +34,20 @@
 
     -->
     <body ng-controller="dri-app-ctrl" style="padding-top: 50px; padding-bottom: 50px;">
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header bg-primary">
+                <h3 class="modal-title" id="myModalLabel">Searching open.FDA.gov...</h3>
+              </div>
+                <div class="well well-sm">
+                    <b>Searching for:&nbsp;</b><div class="modal-body bgColorWhite"></div>
+                </div>
+            </div>
+          </div>
+        </div>          
+        
         <!-- Enables a scaling, full-width viewport -->
         <div class="container-fluid">
             <!-- 
@@ -75,14 +88,15 @@
                         Most Popular Recent Searches
                     </a>
                     <div ng-repeat="recentsearch in recentsearches">
-                        <a href="#" class="list-group-item">
+
+                        <a href="#" onclick="$('drugsID').myInitialValue('tylenol');" class="list-group-item">
                             <span class="badge">{{recentsearch.views}}</span>
                             {{recentsearch.searchName}}
                         </a>
                     </div>
-                </ul>
+                </ul>      
             </div></div> <!-- col, row -->
-
+            
             <!--
 
             RESULTS PANEL
@@ -291,7 +305,6 @@
                                                 </div>
                                             </div> <!-- END: Body for panel -->
                                         </div> <!-- END: Panel for Warnings and Indications -->
-
                                     </div> <!-- END: Panel group for all of the accordions within Label -->       
                                 </div> <!-- END: Panel Group Body -->
                             </div> <!-- END: Panel Definition -->
@@ -393,7 +406,7 @@
                                 </div> <!-- END: Panel Definition -->
                             </div> <!-- END: Enforcements Pane -->
                         </div> <!-- END: Tab panes -->    
-                    </div> <!-- END: The tabs for Label, Events, and Enforcements -->                  
+                    </div> <!-- END: The tabs for Label, Events, and Enforcements -->
                 </div></div> <!-- col, row -->
             </div>
             <!--
