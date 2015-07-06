@@ -1,7 +1,6 @@
 package com.sevatec.gsa.ads.openfda.data.model.response;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  *

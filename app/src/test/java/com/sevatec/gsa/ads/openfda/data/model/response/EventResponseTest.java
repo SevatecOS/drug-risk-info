@@ -18,6 +18,7 @@ public class EventResponseTest {
         Genson genson = new Genson();
         EventResponse deserialize = genson.deserialize(EventNode.class.getResourceAsStream("/event.json"), EventResponse.class);
         assertEquals(10, deserialize.getResults().size());
+        assertEquals("US", deserialize.getResults().get(0).getPrimarysourcecountry());
     }
     
 }

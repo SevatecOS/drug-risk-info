@@ -18,6 +18,7 @@ public class EnforcementResponseTest {
         Genson genson = new Genson();
         EnforcementResponse deserialize = genson.deserialize(EventNode.class.getResourceAsStream("/enforcement.json"), EnforcementResponse.class);
         assertEquals(1, deserialize.getResults().size());
+        assertEquals("D-1501-2014", deserialize.getResults().get(0).getRecall_number());
     }
     
 }

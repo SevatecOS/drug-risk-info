@@ -6,7 +6,7 @@ import java.io.Serializable;
  *
  * @author gax
  */
-public class EventResponse extends AbstractResponse<EnforcementNode> implements Serializable {
+public class EventResponse extends AbstractResponse<EventNode> implements Serializable {
     private static final long serialVersionUID = 1L;
     
 }
