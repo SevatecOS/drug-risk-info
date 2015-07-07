@@ -43,7 +43,7 @@ _Figure 1. User Story boards and Product Backlog Item Tracking_
 
 The rapid nature of the prototype required high-level technical architecture documentation for solution patterns, API boundaries, data sources, information exchanges, integration points, services catalogs, performance and volume metrics, and other technical architecture factors. Our DevOps architecture includes for source code, Docker for configuration management, and an AWS EC2 container to support both our Jenkins continuous integration server and our elastic, load-balanced prototype deployment instances, as illustrated in **Figure 2**. 
 
-![Figure 2](https://cloud.githubusercontent.com/assets/13139023/8550172/0614191a-249d-11e5-82a4-69e80d907ab5.png "Figure 2. Technical Architecture for Drugrisk.info Prototype")
+![Figure 2](https://cloud.githubusercontent.com/assets/13139023/8550895/61881252-24a1-11e5-9106-4ce3a8dd19c8.png "Figure 2. Technical Architecture for Drugrisk.info Prototype")
 
 _Figure 2. Technical Architecture for Drugrisk.info Prototype_
 
