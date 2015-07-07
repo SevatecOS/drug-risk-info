@@ -2,9 +2,15 @@
 
 Under a challenging timeline resulting from the unanticipated inclusion of an unrestricted category for the GSA 18F BPA response, Sevatec rapidly achieved significant outcomes for a compelling and innovative prototype, including:
 
-* One
-* Two
-* Three
+*	User friendly interface to open.FDA.gov data set, limiting results to maximize ability of user to understand data.
+*	Open source Glassfish Jersey JAX-RS implantation to easily call and serve REST services. Our team simply applies annotations to our code to determine where and how REST services are exposed.
+*	Open source Genson makes serializing and deserializing JSON simple and painless. This library can be included through maven and overrides the less accurate JSON parser that comes with Jersey JAX-RS.
+*	We are using JUnit to test our code automatically upon check in. Builds will not continue unless all tests pass and can be configured to fail for low test code coverage found through open source JaCoCo.
+*	Maven build tool is issued for consistent and low maintenance build instructions. Maven also manages the dependency software on development AND build machines. 
+*	We are using a combination of FindBugs, Checkstyle and PMD to perform static code analysis looking for common bugs, formatting issues and more. These tools ensure our code is consistent and is easily read and understood by new development staff.
+*	The User Interface leverages the Twitter Bootstrap 3.0 framework and the angucomplete-alt custom directive to provide a responsive web application.
+*	Data returned from open.FDA.gov clarified with information from “ICH M2 EWG Electronic Transmission of Individual Case Safety Reports Message Specification” for user friendly presentation of Adverse Events.
+
 
 The following narrative documents our agile approach to achieving these objectives, using best practices developed from successful agile implementations across the federal government.
 
