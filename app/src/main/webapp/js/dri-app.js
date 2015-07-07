@@ -66,7 +66,21 @@ app.controller("dri-app-ctrl", function ($scope, $sce, $http) {
     $('#enforcements a').click(function (e) {
         e.preventDefault();
         $(this).tab('enforcements');
-    });    
+    });
+    
+    $.fn.selectText = function () {
+        return $(this).each(function (index, el) {
+            if (document.selection) {
+                var range = document.body.createTextRange();
+                range.moveToElementText(el);
+                range.select();
+            } else if (window.getSelection) {
+                var range = document.createRange();
+                range.selectNode(el);
+                window.getSelection().addRange(range);
+            }
+        });
+    };
 });
 
 
