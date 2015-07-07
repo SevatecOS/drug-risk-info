@@ -3,6 +3,7 @@
 Under a challenging timeline resulting from the unanticipated inclusion of an unrestricted category for the GSA 18F BPA response, Sevatec rapidly achieved significant outcomes for a compelling and innovative prototype, including:
 
 *	User friendly interface to open.FDA.gov data set, limiting results to maximize ability of users to understand data.
+*	Added local Amazon DynamoDB to support auto-completion of drug names, tracking of popular searches, and caching to improve performance.
 *	Open source Glassfish Jersey JAX-RS implementation to easily call and serve REST services. Our team simply applies annotations to our code to determine where and how REST services are exposed.
 *	Open source Genson makes serializing and deserializing JSON simple and painless. This library can be included through maven and overrides the less accurate JSON parser that comes with Jersey JAX-RS.
 *	We are using JUnit to test our code automatically upon check in. Builds will not continue unless all tests pass and can be configured to fail for low test code coverage found through open source JaCoCo.
