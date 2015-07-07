@@ -27,20 +27,33 @@ Sevatec quickly established a prototype goal to: (1) demonstrate technical profi
 For the application, our team established a concise vision statement: "Our simplicity-first DrugRisk information search enables non-technical users to retrieve relevant information about the use, risks, and enforcement actions regarding specific drugs."  Based on this vision the team conducted assessments of existing documentation, data sets, API capabilities and limitations, possible shared services, COTS products, Cloud solutions, and other emerging alternatives that could be used for the prototype.  
 The team met with the user group to solicit basic needs and requirements and documented the story boards and associated Product Backlog Items (PBIs) using Trello, as indicated in **Figure 1**. This involved the creation of three basic user stories, and approximately 40 PBIs needed to address the base requirements received from the users.  These PBIs were reviewed for priority and effort and aligned to the technical and architectural solutions that best fit the rapid but reusable development releases.
 
-[Figure 1](https://cloud.githubusercontent.com/assets/13139023/8549930/786f7178-249b-11e5-8fa1-ba1570908d4c.png)
+![Figure 1](https://cloud.githubusercontent.com/assets/13139023/8549930/786f7178-249b-11e5-8fa1-ba1570908d4c.png "Figure 1. User Story boards and Product Backlog Item Tracking")
+
 _Figure 1. User Story boards and Product Backlog Item Tracking_
 
 The rapid nature of the prototype required high-level technical architecture documentation for solution patterns, API boundaries, data sources, information exchanges, integration points, services catalogs, performance and volume metrics, and other technical architecture factors. Our DevOps architecture includes for source code, Docker for configuration management, and an AWS EC2 container to support both our Jenkins continuous integration server and our elastic, load-balanced prototype deployment instances, as illustrated in **Figure 2**. 
+
+![Figure 2](https://cloud.githubusercontent.com/assets/13139023/8550172/0614191a-249d-11e5-82a4-69e80d907ab5.png "Figure 2. Technical Architecture for Drugrisk.info Prototype")
 
 _Figure 2. Technical Architecture for Drugrisk.info Prototype_
 
 Concurrent to establishing the infrastructure, our user interface specialist met with the users to derive the interface standards and page layout for the application needed to support the product vision. We developed a final agreement on the proposed structure, as originally prototype in **Figures 3 and 4**.
 
+![Figure 3 and 4](https://cloud.githubusercontent.com/assets/13139023/8549933/7876ac7c-249b-11e5-8a5e-28eddd7d4301.png "Figure 3 and 4. User Interface prototypes for development.")
+
 _Figure 3 and 4. User Interface prototypes for development._
 
 Our team engaged from project inception and worked closely with our users to maintain an aggressive development pace, focused on end user value, clear product definition, and process transparency. As shown in **Chart 1**, our Sprint Burndown chart reflects consistent effort and continued progress over the course of the prototype period.
 
+![Chart 1](https://cloud.githubusercontent.com/assets/13139023/8549932/7871f2a4-249b-11e5-9d4e-bdac29c6f017.png "Chart 1. Sevatec Drugrisk.info Sprint Burndown Chart")
+
+_Chart 1. Sevatec Drugrisk.info Sprint Burndown Chart_
+
 Likewise, our Product Backlog Item (PBI) cumulative flow, shown in **Chart 2**, reflects a continual progression of completed tasks over the entire project lifecycle.
+
+![Chart 2](https://cloud.githubusercontent.com/assets/13139023/8549931/7870b984-249b-11e5-9dd3-a0679872d599.png "Chart 2. Sevatec Drugrisk.info Product Backlog Item Cumulative")
+
+_Chart 2. Sevatec Drugrisk.info Product Backlog Item Cumulative_
 
 **Retrospective**
 
