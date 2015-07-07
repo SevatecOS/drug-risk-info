@@ -2,8 +2,8 @@
 
 Under a challenging timeline resulting from the unanticipated inclusion of an unrestricted category for the GSA 18F BPA response, Sevatec rapidly achieved significant outcomes for a compelling and innovative prototype, including:
 
-*	User friendly interface to open.FDA.gov data set, limiting results to maximize ability of user to understand data.
-*	Open source Glassfish Jersey JAX-RS implantation to easily call and serve REST services. Our team simply applies annotations to our code to determine where and how REST services are exposed.
+*	User friendly interface to open.FDA.gov data set, limiting results to maximize ability of users to understand data.
+*	Open source Glassfish Jersey JAX-RS implementation to easily call and serve REST services. Our team simply applies annotations to our code to determine where and how REST services are exposed.
 *	Open source Genson makes serializing and deserializing JSON simple and painless. This library can be included through maven and overrides the less accurate JSON parser that comes with Jersey JAX-RS.
 *	We are using JUnit to test our code automatically upon check in. Builds will not continue unless all tests pass and can be configured to fail for low test code coverage found through open source JaCoCo.
 *	Maven build tool is issued for consistent and low maintenance build instructions. Maven also manages the dependency software on development AND build machines. 
@@ -21,6 +21,7 @@ The General Services Administration’s 18F agile development organization seeks
 **Our Approach**
 
 Sevatec evangelizes agile development at every opportunity for our Federal customers. We introduced agile practices on our Information Technology Analysis, Software Design, and Development Support Services contract with the Bureau of Alcohol, Tobacco, Firearms, and Explosives (ATF). We transformed software development practices at the Federal Highway Administration (FHWA) by introducing rapid prototyping, user stories, and scrum practices. For the U.S. Customs and Immigrations Service (USCIS), we innovated by providing Agile Analytics, a combination of Scrum, Kanban, and Scrumban teams supported with automation for quality and testing of complex data warehouse and business intelligence solutions.
+
 For the 18F BPA, we applied our experience and practices to showcase both the outcomes and process of our technical and business solutions team. We established an ambitious plan for a fully automated DevOps pipeline, using technologies prioritized by 18F, and leveraging a cloud-based infrastructure from day one. We quickly assembled a team of diverse technical professionals who self-organized around the goal of an always-working, always-evolving prototype supported with automated builds, code inspection, test coverage, packaging, and deployment. Our team then prioritized two goals: (1) develop a meaningful initial design, and (2) implement a working DevOps pipeline. After achieving these two baseline activities, the 18F BPA response simply relied on our iterative, evolving improvement of the product based on feedback from our users; all tracked in our working, automated development infrastructure.
 
 **Our Team**
@@ -30,7 +31,9 @@ We assembled a six member team, led by an experienced agile program manager acco
 **Our Solution**
 
 Sevatec quickly established a prototype goal to: (1) demonstrate technical proficiency of both agile development and DevOps, (2) reflect human-centered design and user feedbacks, and (3) prototype a meaningful baseline implementation that always works and meets the needs of our user community. We embraced the objective of providing 18F a working GitHub repository where – during evaluation – your team could introduce a change to the source code and evaluate its impact on our working, public-facing web application with zero manual interaction required.
+
 For the application, our team established a concise vision statement: "Our simplicity-first DrugRisk information search enables non-technical users to retrieve relevant information about the use, risks, and enforcement actions regarding specific drugs."  Based on this vision the team conducted assessments of existing documentation, data sets, API capabilities and limitations, possible shared services, COTS products, Cloud solutions, and other emerging alternatives that could be used for the prototype.  
+
 The team met with the user group to solicit basic needs and requirements and documented the story boards and associated Product Backlog Items (PBIs) using Trello, as indicated in **Figure 1**. This involved the creation of three basic user stories, and approximately 40 PBIs needed to address the base requirements received from the users.  These PBIs were reviewed for priority and effort and aligned to the technical and architectural solutions that best fit the rapid but reusable development releases.
 
 ![Figure 1](https://cloud.githubusercontent.com/assets/13139023/8549930/786f7178-249b-11e5-8fa1-ba1570908d4c.png "Figure 1. User Story boards and Product Backlog Item Tracking")
@@ -63,8 +66,10 @@ _Chart 2. Sevatec Drugrisk.info Product Backlog Item Cumulative_
 
 **Retrospective**
 
-The solicitation, as defined by GSA 18F, clearly reflected our own experiences working in customer environments: complicated external data sets, vague user requirements, short development timeframes, holiday weekends, and demanding technical challenges. While our agile experience proved useful, our DevOps infrastructure revealed itself as the true key to our prototype’s success. With so many moving parts, our team’s ability to coalesce around a working production application with every developer commit produced the most value. 
+The solicitation, as defined by GSA 18F, clearly reflected our own experiences working in customer environments: complicated external data sets, vague user requirements, short development timeframes, holiday weekends, and demanding technical challenges. While our agile experience proved useful, our DevOps infrastructure revealed itself as the true key to our prototype’s success. With so many moving parts, our team’s ability to coalesce around a working production application with every developer source code commit producing the most value. 
+
 We encouraged our mock users to engage with a critical eye. They responded with both defect reports and user interface improvements. Some of those remain in our GitHub issue tracker and Trello story boards. 
+
 We believe our approach, solution, and execution align with the 18F vision. Sevatec demonstrates our ability to both produce outcomes and provide transparency. GSA 18F can rely on Sevatec to support its customers with automated agile solutions that accelerate delivery of high-quality software solutions. 
 
 
